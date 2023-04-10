@@ -1,0 +1,121 @@
+/* En-tête */
+header {
+  background-color: #333;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.comment-date {
+  float: left;
+  margin-left: 30px;
+
+}
+.comment-owner{
+  float: left;
+  margin-left: 30px;
+
+}
+
+.new-comment-section {
+
+  margin-top: 20px;
+  margin-left: 20px;
+  white-space: nowrap;
+}
+
+/* Logo */
+.header-logo {
+  margin-left: 20px;
+  width:80px;
+}
+
+.profile-button-section,
+.logout-button-section {
+  margin: 0 10px;
+}
+
+.profile-button,
+.logout-button {
+  background-color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.profile-button:hover,
+.logout-button:hover {
+  background-color: #333;
+  color: white;
+}
+
+/* Zone de liens */
+.header-links {
+  margin-right: 20px;
+}
+
+.comment button {
+  border: none;
+  color: #ffffff;
+  background-color: #474747;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 2px;
+  margin-right: 1745px;
+  margin-bottom: 30px;
+}
+
+.comment button:hover {
+  background-color: #2e2e2e;
+}
+
+.comment-content {
+
+  text-align: left;
+  margin-left: 30px;
+  font-size: 18px
+}
+/* Zone de gauche */
+.left-section {
+  top: 0;
+  left: 0;
+  width: 200px;
+  margin-top: 100px;
+  height: 100%;
+  background-color: #f1f1f1;
+}
+
+/* Zone centrale */
+.center-section {
+  float: left;
+  background-color: #fff;
+  height: 100%;
+  width: 100%;
+  margin-top: 0px;
+}
+
+
+.textarea {
+  resize: none;
+  width: 800px;
+  height: 150px;
+
+}
+
+.new-comment-section button {
+  background-color: #474747;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 20px;
+
+}
+
+.new-comment-section button:hover {
+  background-color: #2e2e2e;
+}
