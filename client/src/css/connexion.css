@@ -1,55 +1,71 @@
 body {
-    background-color: #f2f2f2;
-    font-family: Arial, sans-serif;
-  }
-  
-  h1 {
-    text-align: center;
-  }
+  background-image: url('../image/1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 1000px;
+}
 
-  p {
-    text-align: center;
-  }
-  
   
   form {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 1rem;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    width: 400px;
+    backdrop-filter: blur(20px); /* ajouter un flou à l'arrière-plan */
   }
+
   
   label {
-    display: block;
-    margin-bottom: 0.5rem;
+    display: block; /* chaque label sur une ligne */
+    margin-bottom: 10px; /* espacement entre les labels */
+    font-size: 16px; /* taille de police par défaut */
   }
   
   input[type="text"],
   input[type="password"] {
-    display: block;
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    margin-bottom: 1rem;
+    display: block; /* chaque champ sur une ligne */
+    width: 100%; /* largeur maximale du champ */
+    padding: 10px; /* espacement intérieur */
+    margin-bottom: 20px; /* espacement entre les champs */
+    border: none; /* pas de bordure */
+    border-radius: 5px; /* coins arrondis */
+    background-color: #eee; /* couleur de fond gris clair */
+    font-size: 16px; /* taille de police par défaut */
   }
   
   input[type="submit"] {
-    background-color: #333;
-    color: #fff;
+    display: block; 
+    margin: auto;  
+     padding: 10px 20px;
     border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 3px;
-    cursor: pointer;
+     border-radius: 5px; 
+    background-color: #444; 
+    color: #fff;  
+    font-size: 16px; 
+    cursor: pointer; }
+
+  input[type="email"] {
+    display: block; 
+    width: 100%; 
+    padding: 10px; 
+    margin-bottom: 20px; 
+    border: none; 
+    border-radius: 5px; 
+    background-color: #eee; 
+    font-size: 16px; 
   }
   
-  input[type="submit"]:hover {
-    background-color: #555;
+
+  p {
+    color: rgb(0, 0, 0);
+    font-size: 20px;
   }
   
-  #check_syntaxe{
-    color: #ff0000	;
-    vertical-align: middle;
+  a{
+  
+    color: rgb(255, 255, 255);
   }
+  

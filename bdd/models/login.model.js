@@ -2,6 +2,10 @@ const mongoose = require('mongoose')
 
 const sch = mongoose.Schema({
 
+    id : {
+        type:String,
+        required:true,
+    },
     email : {
         type:String,
         required:true
@@ -9,6 +13,10 @@ const sch = mongoose.Schema({
     password : {
         type:String,
         required:true
+    },
+    isconnected : {
+        type:Boolean,
+        required : true
     }
 },{
     timestamps:true

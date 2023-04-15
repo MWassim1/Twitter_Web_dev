@@ -1,6 +1,7 @@
 import '../../css/acceuil.css';
 import { useEffect, useRef, useState } from 'react';
 import axios from "axios"
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -10,6 +11,8 @@ function Home_main(props){
     const axiosUrlUser = "http://localhost:7000/api/user/:id"
     const axiosUrlNewPost = "http://localhost:7000/api/post"
     const axiosUrlGetPosts = "http://localhost:7000/api/posts"
+    const axiosUrlLogin = "http://localhost:7000/api/getlogin"
+
 
     const [comment,setComment] = useState('')
     const url = window.location.href
@@ -17,26 +20,28 @@ function Home_main(props){
     const id = url.slice(last_slash+1)
     let index_post = 0 
     
+    const navigate = useNavigate()
     const areainput = useRef(null)
 
     const [username,setUsername] = useState('')
     const [post,setPost] = useState('')
 
     useEffect(()=>{
-        console.log(JSON.stringify({_id : id }))
+        console.log("ici : "+JSON.stringify({_id : id }))
         axios.post(axiosUrlUser,{_id:`${id}`})
           .then(res=>{
             if(res.status === 200){
-              console.log(res.data.username)
+              console.log("username : "+res.data.username)
               setUsername(res.data.username)
             } 
           })
-          .catch((err)=>{ console.log(err)})
+          .catch((err)=>{console.log(err);navigate('/')})
     },[])
 
     useEffect(()=>{
       axios.get(axiosUrlGetPosts)
         .then(res=>{
+          console.log("RES : "+res)
           console.log(res.data.length)
           if(res !== undefined){
             for(let i= index_post; i < res.data.length ; i ++, index_post++){
@@ -48,6 +53,15 @@ function Home_main(props){
     } 
     ,[post])
 
+    useEffect(()=>{
+      axios.get(axiosUrlLogin)
+      .then((res)=>{
+        if(res.data.loggedIn === false){ 
+          console.log("ok pour navigate")
+          navigate("/")
+        }
+      })
+    },[])
     const create_post = (data) =>{
       let comment_section =  document.getElementById("comment-section")
 
@@ -133,17 +147,17 @@ function Home_main(props){
 
     const handleAdd = (evt) =>{
       evt.preventDefault()
-      
+      if(comment.trim() !== ""){
       axios.post(axiosUrlNewPost,{user_id:id,username:username,post:comment})
           .then(res=>{
             console.log(res.data)
             setPost(res.data)
-            console.log(document.getElementById("areainput"))
             areainput.current.value = ""
+            setComment("")
             
           })
           .catch((err)=>{console.log(err)})
-      
+        }
     }
       
     const handleChange = (evt) =>{
@@ -159,13 +173,13 @@ function Home_main(props){
     return <div>
         <div className="center-section">
         <div className="new-comment-section">
-      <h2>Nouveau commentaire</h2>
-      <textarea ref = {areainput} className='textarea' placeholder="Entrez votre commentaire ici..."  onKeyDown={onEnterKey}onChange={handleChange}></textarea>
+      <h2>Nouveau post</h2>
+      <textarea id='areainput' ref = {areainput} className='textarea' value={comment} placeholder="Entrez votre post ici..."  onKeyDown={onEnterKey}onChange={handleChange}></textarea>
       <button   onClick={handleAdd}>Ajouter</button>
       </div>
       <p>{username}</p>
     <div id="comment-section" className="comment-list-section">
-      <h2>Liste commentaires</h2>
+      <h2>Liste posts</h2>
       <div className="comment">
         <p></p>
       </div>

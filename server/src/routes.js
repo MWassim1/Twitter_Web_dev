@@ -14,7 +14,7 @@ module.exports=function(router){
   .post('/api/login',(req,res)=>{
     console.log(" /api/login")
   })
-  .get('/api/user/logout',(req,res)=>{
+  .put('/api/user/logout',(req,res)=>{
     console.log('/api/user/logout')
   })
   .post("/api/user/:id",(req,res)=>{
@@ -26,6 +26,22 @@ module.exports=function(router){
   .get("/ai/posts",(req,res)=>{
     console.log("/api/posts")
   })
+  .get("/api/getlogin",(req,res)=>{
+    console.log("/api/getlogin")
+  })
+  .put("/api/setlogin",(req,res)=>{
+    console.log("/api/setlogin")
+  })
+  .get("/api/logged",(req,res)=>{
+    console.log("/api/logged")
+  })
+  .put("/api/user/islogged",(req,res)=>{
+    console.log("/api/user/islogged")
+  })
+  .get("/api/user/:id",(req,res)=>{
+    console.log("/api/user/:id")
+  })
+  
 
   
 

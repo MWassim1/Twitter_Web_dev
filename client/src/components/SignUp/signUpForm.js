@@ -11,7 +11,7 @@ function SignUpForm(props){
 	const axiosUrl = "http://localhost:7000/api/users"
 	const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 	const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%+-]).{8,24}$/;
-	const NAME_REGEX = /^[^@&"()!_$*£`+=:/\|,?;#][^0-9]{1,30}$/;
+	const NAME_REGEX = /^[^@&"()!_$*£`+=:/\|,?;#][^0-9][A-z\s?]{1,30}$/;
 
 	const userRef = useRef();
 
@@ -79,7 +79,7 @@ function SignUpForm(props){
 
 		axios.post(axiosUrl,account)
 		.then(res=>{
-			if(res.status ===200){
+			if(res.status ===201){
 				window.location.replace("http://localhost:3000/Home/"+`${res.data._id}`);
 
 			}

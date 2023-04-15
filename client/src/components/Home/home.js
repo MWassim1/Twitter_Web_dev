@@ -1,22 +1,22 @@
 import React from 'react';
 import '../../css/acceuil.css';
-import Header from "../x/header"
+import Header from '../x/header';
 import Home_header from './home_header';
-import Home_left from './home_left';
 import Home_main from './home_main';
-
-function Home(props){
-
+import Navbar from './navbar';
 
 
-
-
-    return <div><Header title="Acceuil"></Header>
-                <Home_header></Home_header>
-                <Home_left></Home_left>
-                <Home_main></Home_main>
-
+function Home(props) {
+  return ( 
+    <div >
+      <Header title="Acceuil"></Header>
+      <Navbar />
+      <div className="center-section">
+        <Home_header></Home_header>
+        <Home_main></Home_main>
+      </div>
     </div>
+);
 }
 
-export default Home
+export default Home;

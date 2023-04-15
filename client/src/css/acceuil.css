@@ -1,15 +1,103 @@
-/* En-tête */
 header {
   background-color: #333;
   color: #fff;
   display: flex;
   align-items: center;
+  height: 90px;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
+
+/* Logo */
+.header-logo {
+  
+  margin-left: 20px;
+  width:80px;
+}
+
+/* Search bar */
+.search-bar-section {
+  display: flex;
+  align-items: center;
+  margin-right: 700px;
+  margin-top: 10px;
+}
+
+.search-bar {
+  width: 300px;
+  height: 30px;
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.profile-button-section {
+  margin-left: 300px;
+}
+
+.profile-button,
+.logout-button {
+  background-color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.logout-button {
+
+  margin-right:20px ;
+}
+
+.profile-button:hover,
+.logout-button:hover {
+  background-color: #333;
+  color: white;
+}
+
+
+/* Navbar */
+.navbar {
+  position: fixed; /* rend la navbar fixe */
+  height: 100%;
+  width: 200px;
+  background-color: #989898;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  top: 0; 
+}
+
+.navbar ul {
+  list-style-type: none;
+  padding: 0;
+  overflow: hidden;
+  height: 40px;
+  background-color: #f1f1f1;
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 10px;
+  font-size : 17px;
+}
+
+
+.navbar li a {
+  display: block;
+  color: #333;
+  text-align: center;
+  padding: 0px;
+  height: 40px;
+  text-decoration: none;
+}
+
+.navbar li a:hover {
+  background-color: #ffffff;
+}
+
 
 .comment-date {
   float: left;
-  margin-left: 30px;
+  margin-left: 0px;
 
 }
 .comment-owner{
@@ -25,31 +113,6 @@ header {
   white-space: nowrap;
 }
 
-/* Logo */
-.header-logo {
-  margin-left: 20px;
-  width:80px;
-}
-
-.profile-button-section,
-.logout-button-section {
-  margin: 0 10px;
-}
-
-.profile-button,
-.logout-button {
-  background-color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.profile-button:hover,
-.logout-button:hover {
-  background-color: #333;
-  color: white;
-}
 
 /* Zone de liens */
 .header-links {
@@ -73,35 +136,46 @@ header {
 }
 
 .comment-content {
-
   text-align: left;
-  margin-left: 30px;
-  font-size: 18px
-}
-/* Zone de gauche */
-.left-section {
-  top: 0;
-  left: 0;
-  width: 200px;
-  margin-top: 100px;
-  height: 100%;
-  background-color: #f1f1f1;
-}
+  margin-right: 150px;
+  font-size: 18px;
+  word-wrap: break-word;
+  }
+  
+
 
 /* Zone centrale */
 .center-section {
   float: left;
   background-color: #fff;
-  height: 100%;
-  width: 100%;
+  width: calc(100% - 200px);
+  margin-left: 200px; 
   margin-top: 0px;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.comment {
+  border: 2px solid rgb(205, 205, 205);
+  border-radius: 20px;
+  padding: 10px;
+  margin-bottom: 20px;
+  margin-right: 70px;
 }
 
 
 .textarea {
+  border: 2px solid rgb(132, 132, 132);
+  border-radius: 15px;
   resize: none;
-  width: 800px;
-  height: 150px;
+  width: 850px;
+  height: 170px;
 
 }
 

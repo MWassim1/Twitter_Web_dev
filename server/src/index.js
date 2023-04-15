@@ -5,23 +5,36 @@ const router = express.Router()
 const connectDataBase = require('../../bdd');
 const dotenv = require('dotenv').config()
 const cookieParser = require('cookie-parser')
-const {checkUser,auth} = require('./middleware/checkUsers')
+const bodyParser = require('body-parser');
+const session = require('express-session');
+
 
 
 // Permet de regler quelques problèmes 
 const cors = require('cors');
 const app = require('./app');
+
+
+
+// Cookies
 server.use(cookieParser())
-server.use(cors());
+server.use(cors({
+  origin:["http://localhost:3000"],
+  methods:["GET","POST","PUT"],
+  credentials:true
+}));
 
+server.use(bodyParser.urlencoded({extended:true}))
+server.use(session({
+  key:"user",
+  secret:process.env.TOKEN,
+  resave: false , 
+  saveUninitialized : false,
+  cookie:{
+    expires : 60 * 60 * 24,
+  }
+}))
 
-//jwt 
-
-server.get('*',checkUser);
-server.get('/jwtid',auth,(_,res)=>{
-  //console.log(res.locals.user.check_user._id)
-  res.status(200).send(res.locals.user.check_user._id)
-})
 
 // lance l'App
 require('./app')(server,router);
