@@ -20,7 +20,7 @@ const app = require('./app');
 server.use(cookieParser())
 server.use(cors({
   origin:["http://localhost:3000"],
-  methods:["GET","POST","PUT"],
+  methods:["GET","POST","PUT","DELETE"],
   credentials:true
 }));
 
@@ -31,7 +31,7 @@ server.use(session({
   resave: false , 
   saveUninitialized : false,
   cookie:{
-    expires : 60 * 60 * 24,
+    expires : 3600*24*24,
   }
 }))
 

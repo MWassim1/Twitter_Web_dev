@@ -61,14 +61,14 @@ function SignInForm(props){
       setConnexion({...connexion,[name]:value})
       }
 
-    return <div><body ><Header title="Page de connexion"></Header><h1>Connexion</h1><form action="submit" onSubmit={handleSubmit} > 
+    return <div><div id="body" ><Header title="Page de connexion"></Header><h1>Connexion</h1><form action="submit" onSubmit={handleSubmit} > 
     <p id='check_syntaxe'></p>
 		<label htmlFor="email"><input type="text" id="email" name="email" placeholder="Adresse email" value={connexion.email} onChange={handleChange} /></label><br/><br/>
 		<label htmlFor="password"><input  type="password" id="password" name="password" placeholder="Mot de Passe" value={connexion.password} onChange={handleChange} autoComplete="on" ></input></label><br/><br/>
         <input type="submit" value="Se connecter"/>
         </form>
         <p>Vous n'avez pas de compte ? <Link to="/SignUp">Créer un compte</Link></p>
-        </body></div>
+        </div></div>
 }
 
 export default SignInForm

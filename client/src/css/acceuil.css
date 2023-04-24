@@ -12,7 +12,10 @@ header {
 .header-logo {
   
   margin-left: 20px;
-  width:80px;
+  margin-right: 20px;
+  width: 140px;
+  margin-bottom: 10px;
+
 }
 
 /* Search bar */
@@ -36,19 +39,25 @@ header {
   margin-left: 300px;
 }
 
-.profile-button,
 .logout-button {
   background-color: white;
   border: none;
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
+  margin-top: 20px;
 }
 
-.logout-button {
+.profile-button{
+  background-color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 10px;
 
-  margin-right:20px ;
 }
+
 
 .profile-button:hover,
 .logout-button:hover {

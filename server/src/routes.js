@@ -41,9 +41,45 @@ module.exports=function(router){
   .get("/api/user/:id",(req,res)=>{
     console.log("/api/user/:id")
   })
-  
-
-  
+  .put("/api/user/:id",(req,res)=>{
+    console.log("/api/user/:id")
+  })
+  .get("/api/post/:id",(req,res)=>{
+    console.log("/api/post/:id")
+  })
+  .put("/api/post/:id",(req,res)=>{
+    console.log("/api/post/:id")
+  })
+  .delete("/api/post/:id",(req,res)=>{
+    console.log(" del /api/post/:id")
+  })
+  .post("/api/friend/:id1/:id2",(req,res)=>{
+    console.log("/api/friend/:id1/:id2")
+  })
+  .get("/api/friend/:id",(req,res)=>{
+    console.log("/api/friend/:id")
+  })
+  .delete("/api/friend/:id1/:id2",(req,res)=>{
+    console.log("/api/friend/:id1/:id2")
+  })
+  .post("/api/post/comment/:id/:id_post",(req,res)=>{
+    console.log("/api/post/comment/:id/:id_post")
+  }) 
+  .get("/api/post/comment/:id_post",(req,res)=>{
+    console.log("/api/post/comment/:id_post")
+  })
+  .put("/api/post/comment/:id_post",(req,res)=>{
+    console.log("/api/post/comment/:id_post")
+  })
+  .delete("/api/post/comment/:id_post",(req,res)=>{
+    console.log("/api/post/comment/:id_post")
+  })
+  .put("/api/user/:id/:id_follow",(req,res)=>{
+    console.log("/api/user/:id/:id_follow")
+  })
+  .get("/api/user/followers/:id_follow",(req,res)=>{
+    console.log("/api/user/followers/:id_follow")
+  })
 
   
 
@@ -53,51 +89,7 @@ module.exports=function(router){
 }
 
 
-// const users = [{
-//   firstname:'test',
-//   lastname:'nomtest',
-//   email:'test@gmail.com',
-//   login:'Test',
-//   password:'test_password'
-// }];
 
-
-// app.get((`/api/users`),(req,res) => {
-//       res.send({
-//           data : [
-//               {
-//                   firstname:'test',
-//                   lastname:'nomtest',
-//                   email:'test@gmail.com',
-//                   login:'Test',
-//                   password:'test_password'
-//               }
-
-//           ]
-//       })
-
-//   })
-
-//   app.get((`/api/users/:id`),(req,res) => {
-
-//     const id = req.params.id-1;
-//     res.send({
-//         data : users[id] || null
-//     })
-
-// })
-
-
-// //POST /api/users (récupère un formulaire)
-// app.post(`/api/users`,(req,res)=>{
-//   const data = req.body
-//   users.push(data)
-//   res.send({
-//     index: users.length,
-//     data : users[users.length-1]
-
-//   })
-// })
 
 
 

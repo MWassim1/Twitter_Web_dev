@@ -15,11 +15,11 @@ function Home_main(props){
 
 
     const [comment,setComment] = useState('')
+    const [index_post,setIndexPost] = useState(0)
     const url = window.location.href
     const last_slash = url.lastIndexOf('/')
     const id = url.slice(last_slash+1)
-    let index_post = 0 
-    
+
     const navigate = useNavigate()
     const areainput = useRef(null)
 
@@ -44,10 +44,12 @@ function Home_main(props){
           console.log("RES : "+res)
           console.log(res.data.length)
           if(res !== undefined){
-            for(let i= index_post; i < res.data.length ; i ++, index_post++){
+            let i = index_post
+            for(i; i < res.data.length ; i ++){
               create_post(res.data[i])
-              console.log(i+ " --- "+Object.keys(res).length)
+              console.log(i+ " --- "+Object.keys(res).length,index_post)
             }
+            setIndexPost(i)
           }
        }).catch((err)=>{console.log(err)})
     } 
@@ -140,8 +142,6 @@ function Home_main(props){
       comment_section.insertBefore(new_div_for_comment ,comment_section.firstChild.nextSibling)
 
     }
-
-
 
 
 
