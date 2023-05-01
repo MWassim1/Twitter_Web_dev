@@ -5,6 +5,7 @@ const UserModel = require('./models/user.model')
 const FriendModel = require('./models/friend.model')
 const CommentModel = require('./models/comment.model')
 const FollowModel = require('./models/followers.model')
+const SessionModel =  require('./models/session.model')
 
 // hash
 const bcrypt = require('bcrypt')
@@ -26,10 +27,7 @@ module.exports.formSignIn = async (req,res)=>{
     }
     bcrypt.compare(password,check_user.password,(_,r)=>{
         if(r){
-           // console.log("OK hash")
             req.session.user = check_user
-            console.log("OK session : ")
-            console.log(req.session.user)
             return res.status(200).send(check_user)
         }
         else {
@@ -82,7 +80,6 @@ module.exports.logout = async (req,res) => {
     
     const {id, email , password, isconnected } = req.body
     const user_updated = await LoginModel.updateOne({id: id, email :email,password:password},{$set :{isconnected: isconnected}})
-    console.log("iciiciccici :"+ req.body)
     res.cookie('user','',{maxAge:1})
     res.status(200).send("logout OK")
 
@@ -91,9 +88,7 @@ module.exports.logout = async (req,res) => {
 }
 
 module.exports.user_id = async(req,res)=>{
-    console.log(req.body)
     const user = await FormModel.findById(req.body)
-    console.log("ok user : ",user)
     if(user===null){
         console.log("401")
         return res.status(401).send(user)
@@ -116,7 +111,6 @@ module.exports.get_post=async(req,res)=>{
 
     const posts = await PostModel.find()
     console.log(Object.keys(posts).length)
-    console.log(posts[0])
     if(posts[0]!==undefined){
         const date = posts[0].createdAt
         console.log(date.getHours()+':'+date.getMinutes()+ ' - '+ date.getDate()+'/' + (date.getMonth()+1) + '/'+date.getFullYear())
@@ -129,7 +123,6 @@ module.exports.setlogin= async(req,res)=>{
     const {id , email , password, isconnected } = req.body
     let k_email=email.trim()
     const user = (await LoginModel.find({id:id ,email :  k_email,password:password}))
-    console.log(user,user.length === 0)
     if(user.length === 0){
             await LoginModel.create({
             id: id,
@@ -147,6 +140,14 @@ module.exports.setlogin= async(req,res)=>{
     
 }
 
+module.exports.get_login = async (req,res) =>{
+    const user = await LoginModel.find({id:req.params.user_id})
+    if(user.length === 1) {
+        return res.status(200).send(user[0])
+    }
+    return res.status(404).send("User not found")
+}
+
 module.exports.getlogged = async (req,res)=>{
 
 
@@ -156,7 +157,6 @@ module.exports.getlogged = async (req,res)=>{
 
 module.exports.islogged = async(req,res)=>{
     const user = await LoginModel.find({id : req.body.id})
-    console.log(req.body)
     if(user.length === 0){
       return  res.status(401).send(req.body)
     }
@@ -171,45 +171,94 @@ module.exports.get_user = async(req,res)=>{
     if(user.length === 0 ){
         return res.status(404).send(user)
     }
-    console.log(user)
     return res.status(200).send(user)
 }
 
 
 module.exports.setUser = async (req,res)=>{
 
-    const {lastname,firstname,email,username,password,bio,age,pays,ville} = req.body
+    const user_ObjectId = new ObjectId(req.params.id)
+    const {lastname,firstname,email,username,password,profile_picture,bio,age,pays,ville} = req.body
     const user  = await UserModel.find({id :req.params.id})
     if(user.length === 0){
-       const new_user=  await UserModel.create({
-            id : req.params.id,
-            lastname:lastname,
-            firstname:firstname,
-            email:email,
-            username:username,
-            password:password,
-            bio:bio,
-            age:age,
-            pays:pays,
-            ville:ville
-
+        bcrypt.hash(password,salt)
+        .then(async hash=>{
+            await UserModel.create({
+                id : req.params.id,
+                lastname:lastname,
+                firstname:firstname,
+                email:email,
+                username:username,
+                password:hash,
+                profile_picture:profile_picture,
+                bio:bio,
+                age:age,
+                pays:pays,
+                ville:ville
+            
+            })
+            .then(async (new_user)=>{
+                console.log(new_user)
+                await FormModel.updateOne({_id:user_ObjectId},{$set : {lastname:lastname,firstname:firstname,email:email,username:username,password:hash}})
+                .then(async res=>{console.log(res)
+                        await LoginModel.updateOne({id:req.params.id},{$set : {email:email,password:hash}})
+                            .then(res=>{console.log(res)})
+                            .catch((err)=>{console.log(err)})
+                })
+                .catch(err=>{console.log(err)})
+                return res.status(201).json(new_user)
+            })
+            .catch((err)=>{res.status(500).json(err)})
         })
-        return res.status(201).send(new_user)
-    }
-    const user_updated = await UserModel.updateOne({id:req.params.id},{$set : {lastname:lastname,firstname:firstname,email:email,username:username,password:password,bio:bio,age:age,pays:pays,ville:ville}})
-    return res.status(200).send(user_updated)
+        .catch((err)=>{console.log(err);res.status(500).json(err)})
 
+    }
+    else {
+        bcrypt.hash(password,salt)
+            .then(async hash=>{
+                await UserModel.updateOne({id:req.params.id},{$set : {lastname:lastname,firstname:firstname,email:email,username:username,password:hash,profile_picture:profile_picture,bio:bio,age:age,pays:pays,ville:ville}})
+                .then( async (user_updated)=>{
+                    await FormModel.updateOne({_id:user_ObjectId},{$set : {lastname:lastname,firstname:firstname,email:email,username:username,password:hash}})
+                    .then(async res=>{
+                        await LoginModel.updateOne({id:req.params.id},{$set : {email:email,password:hash}})
+                        .then(res=>{console.log(res)})
+                        .catch((err)=>{console.log(err)})
+                    })
+                    .catch(err=>{console.log(err)})
+                    console.log(user_updated)
+                    return res.status(201).json(user_updated)
+                })
+                .catch((err)=>{res.status(500).json(err)})
+            })
+            .catch((err)=>{console.log(err);res.status(500).json(err)})
+        }
+    // const user_updated = await UserModel.updateOne({id:req.params.id},{$set : {lastname:lastname,firstname:firstname,email:email,username:username,password:password,bio:bio,age:age,pays:pays,ville:ville}})
+    // return res.status(200).send(user_updated)
+
+}
+
+module.exports.getUser = async(req,res)=>{
+    const user = await UserModel.find({id:req.params.id})
+    return res.status(200).send(user[0])
 }
 
 //obtention d'une publication specifique
 module.exports.get_post_id = async(req,res)=> {
     const posts = await PostModel.find({user_id:req.params.id})
-    console.log(req.params.id)
     if(posts.length === 0 ){
         return res.status(404).send(posts)
     }
     return res.status(200).send(posts)
 
+}
+
+module.exports.get_post_idpost = async (req,res) =>{
+    const post_id = new ObjectId(req.params.id_post)
+    const post = await PostModel.find({_id:post_id})
+    if(post.length === 0){
+        return res.status(404).send("POST not found")
+    }
+    return res.status(200).send(post[0])
 }
 
 module.exports.setPost = async(req,res) =>{
@@ -282,7 +331,7 @@ module.exports.getFriend = async(req,res)=>{
         return res.status(200).send("No friends")
 
     }
-    return res.status(200).send(friends[0].friends_login)
+    return res.status(200).send(friends[0])
 }
 
 module.exports.delFriend = async(req,res)=>{
@@ -315,7 +364,7 @@ module.exports.addComment = async(req,res) =>{
     const id_post  = new ObjectId(req.params.id_post)
     const post = await PostModel.find({_id:id_post})
     if(post.length === 0 ){
-        return res.status(404).send("POST not found")
+        return res.status(404).send("POST not found") 
     }
     const new_post_w_comments = await CommentModel.create({
         post_id : req.params.id_post,
@@ -394,4 +443,34 @@ module.exports.getFollowers = async(req,res)=>{
         return res.status(404).send("User not found")
     }
     return res.status(200).send(getfollowers[0])
+}
+
+module.exports.getUserByName = async(req,res) =>{
+    const users = await FormModel.find({username : {$regex : "^"+req.params.username}})
+    console.log("USERS : ",users,req.params.username)
+    if(users.length === 0){
+        console.log("ok")
+        return res.status(404).send("No users found")
+    }
+    return res.status(200).send(users)
+}
+
+module.exports.saveSession = async (req,res)=>{
+
+    const {user_id,session} = req.body
+    const user = await SessionModel.find({user_id:user_id})
+    if(user.length === 0){
+        const new_user = await SessionModel.create({
+            user_id:user_id,
+            session:session
+        })
+        return res.status(200).send(new_user)
+    }
+    const user_updated = await SessionModel.updateOne({user_id:user_id},{$set :{session:session}})
+    return res.status(200).send(user_updated)
+}
+
+module.exports.getSession = async(req,res) =>{
+    const session = await SessionModel.find({user_id:req.params.user_id})
+    return res.status(200).send(session[0])
 }

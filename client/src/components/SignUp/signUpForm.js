@@ -39,7 +39,7 @@ function SignUpForm(props){
 
    
 
-	const [account,setAcount] = useState({
+	const [account,setAccount] = useState({
 		lastname:'',
 		firstname : '',
 		email:'',
@@ -51,23 +51,23 @@ function SignUpForm(props){
 
     useEffect(() => {
         setValidName(USER_REGEX.test(user));
-		setAcount({...account,username:user})
+		setAccount({...account,username:user})
     }, [user])
 
 
 	useEffect(() => {
         setValidLastname(NAME_REGEX.test(lastname));
-		setAcount({...account,lastname:lastname})
+		setAccount({...account,lastname:lastname})
     }, [lastname])
 
 	useEffect(() => {
         setValidFirstname(NAME_REGEX.test(firstname));
-		setAcount({...account,firstname:firstname})
+		setAccount({...account,firstname:firstname})
     }, [firstname])
 
 	useEffect(() => {
         setValidPassword(PWD_REGEX.test(password));
-		setAcount({...account,password:password})
+		setAccount({...account,password:password})
     }, [password])
 
    
@@ -89,7 +89,7 @@ function SignUpForm(props){
 
 	const handleChange = (evt) => {
 		const{name,value} = evt.target;
-		setAcount({...account,[name]:value})
+		setAccount({...account,[name]:value})
 	  }
 
 	 
@@ -114,10 +114,10 @@ function SignUpForm(props){
 
 
 
-		<label htmlFor="username">Nom d'utilisateur :<FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} /><FontAwesomeIcon icon={faTimes} className={validName || !user ? "hide" : "invalid"} /></label>
-		<input type="text" id="username"  ref={userRef} autoComplete="off" onChange={(e) => setUser(e.target.value)} value={user} required aria-invalid={validName ? "false" : "true"} aria-describedby="user_alert" onFocus={() => setUserFocus(true)} onBlur={() => setUserFocus(false)}/>
+		<label htmlFor="username_singUp">Nom d'utilisateur :<FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} /><FontAwesomeIcon icon={faTimes} className={validName || !user ? "hide" : "invalid"} /></label>
+		<input type="text" id="username_signUp"  ref={userRef} autoComplete="off" onChange={(e) => setUser(e.target.value)} value={user} required aria-invalid={validName ? "false" : "true"} aria-describedby="user_alert" onFocus={() => setUserFocus(true)} onBlur={() => setUserFocus(false)}/>
 		<p id="user_alert" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
-		<FontAwesomeIcon icon={faInfoCircle} />4 à 24 caractères.<br />Doit commencer par une lettre.<br />Les lettres,chiffres et les underscores sont autorisés.</p>
+		<FontAwesomeIcon icon={faInfoCircle} />4 à 24 caractères.<br />Doit commencer par une lettre.<br />Les lettres,chiffres et les underscores sont autorisés (pas d'espaces).</p>
 
 
 

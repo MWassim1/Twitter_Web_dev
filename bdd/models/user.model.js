@@ -29,6 +29,9 @@ const sch = mongoose.Schema({
         type:String,
         required:true
     },
+    profile_picture:{
+        type:String,
+    },
     bio : {
         type:String
     },

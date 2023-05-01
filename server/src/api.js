@@ -1,4 +1,4 @@
-const { formSignIn, formSignUp,logout,user_id,new_post,get_post,setlogin,getlogged,get_user, islogged,setUser,get_post_id,setPost,delPost,addFriend,getFriend,delFriend,addComment,getComments,setComment,delComment,addFollow,getFollowers} = require('../../bdd/function');
+const { formSignIn, formSignUp,logout,user_id,new_post,getUser,get_post,setlogin,getSession,get_login,getlogged,get_user, islogged,setUser,saveSession,get_post_id,get_post_idpost,setPost,delPost,addFriend,getFriend,delFriend,addComment,getComments,setComment,delComment,addFollow,getFollowers,getUserByName} = require('../../bdd/function');
 
   
 module.exports=function(app){
@@ -20,8 +20,8 @@ module.exports=function(app){
 app.post(`/api/users`,formSignUp)
 
 
-//PUT /api/users/:id (mise à jour  de compte utilisateur)
-
+//GET /api/users/:username (récupère les utlisateurs avec l'username = :username)
+.get("/api/users/:username",getUserByName)
 
 
 //POST /api/login (connexion d'un utilisateur)
@@ -29,12 +29,17 @@ app.post(`/api/users`,formSignUp)
 
     
 //GET /api/getlogin (vérifie si l'utilisateur est connecté)
-.get("/api/getlogin",(req,res)=>{
-  if(req.session.user){
-    console.log(req.session.user)
+.get("/api/getlogin/:user_id",get_login)
+
+
+//GET /api/getsession (récupère la session)
+.get("/api/getsession",(req,res)=>{
+  console.log("SESSION : ",req.session)
+  if(req.session.user !== undefined){
     res.send({loggedIn: true,user: req.session.user})
   }else { res.send({loggedIn: false})}
 })
+
 
 //put /api/user/logout (déconnexion d'un utilisateur + mise à jour de l'état de l'utilisateur )
 
@@ -59,8 +64,11 @@ app.post(`/api/users`,formSignUp)
 .post("/api/user/:id",user_id)
 
 
-//PUT /api/users/:id (mise à jour des informations d'un utilisateur)
+//PUT /api/user/:id (mise à jour des informations d'un utilisateur)
 .put("/api/user/:id",setUser)
+
+//GET /api/user/:id (récupère toutes les informations liées à l'utilisateur :id)
+.get("/api/userinfo/:id",getUser)
 
 //GET /api/logged (obtention des utilisateurs connectés)
 .get("/api/logged",getlogged)
@@ -80,8 +88,11 @@ app.post(`/api/users`,formSignUp)
 
 .get("/api/posts",get_post)
 
-//GET /api/post/:id (obtention d'une publication specifique)
+//GET /api/post/:id (obtention d'une publication specifique pour l'utilisateur :id)
 .get("/api/post/:id",get_post_id)
+
+//GET /api/post/:id (obtention d'une publication specifique pour le post :id_post)
+.get("/api/post2/:id_post",get_post_idpost)
 
 //PUT /api/post/:id (mise à jour du post id )
 .put("/api/post/:id",setPost)
@@ -133,6 +144,15 @@ app.post(`/api/users`,formSignUp)
 
 //GET /api/user/followers/:id_follow (Obtention de toutes les informations liées aux follows de :id_follow )
 .get("/api/user/followers/:id_follow",getFollowers)
+
+
+
+
+// Gestion de la session : \\
+
+.put("/api/savesession",saveSession)
+
+.get("/api/getsession/:user_id",getSession)
 
 
 } 

@@ -26,8 +26,11 @@ module.exports=function(router){
   .get("/ai/posts",(req,res)=>{
     console.log("/api/posts")
   })
-  .get("/api/getlogin",(req,res)=>{
-    console.log("/api/getlogin")
+  .get("/api/getlogin/:user_id",(req,res)=>{
+    console.log("/api/getlogin/:user_id")
+  })
+  .get("/api/getsession",(req,res)=>{
+    console.log("/api/getsession")
   })
   .put("/api/setlogin",(req,res)=>{
     console.log("/api/setlogin")
@@ -80,9 +83,22 @@ module.exports=function(router){
   .get("/api/user/followers/:id_follow",(req,res)=>{
     console.log("/api/user/followers/:id_follow")
   })
+  .get("/api/users/:username",(req,res)=>{
+    console.log("/api/users/:username")
+  })
+  .get("/api/post2/:id_post",(req,res)=>{
+    console.log("/api/post2/:id_post")
 
-  
-
+  })
+  .put("/api/savesession",(req,res)=>{
+    console.log("/api/savesession")
+  })
+  .get("/api/getsession/:user_id",(req,res)=>{
+    console.log("/api/getsession/:user_id")
+  })
+  .get("/api/userinfo/:id",(req,res)=>{
+    console.log("/api/userinfo/:id")
+  })
 
 
 

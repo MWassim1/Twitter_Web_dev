@@ -1,0 +1,161 @@
+
+.edit-form {  
+  background-color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+}
+
+/* En-tête */
+#edit_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #333;
+  }
+  
+  /* Logo */
+  .header-logo {
+    height: 50px;
+  }
+  
+  /* Boutton Home */
+  .edit_return-button {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  
+  }
+  
+  .edit_logout-button-profile:hover {
+    background-color: #333;
+    color: white;
+  }
+  
+  /* Boutton de déconnexion */
+  .edit_logout-button-profile {
+    background-color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 20px;
+  }
+  
+  .edit_return-button:hover {
+    background-color: #333;
+    color: white;
+  }
+
+  #edit-profile-submit{
+    background-color: #333;
+    position: relative;
+    left: 530px;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 20px;
+    width: 270px;
+  }
+
+  #edit-profile-submit:hover{
+    background-color: #212121;
+    color: white;
+  }
+
+  #edit-profile-form {
+    margin-top: 20px;
+    margin-left: 50px;
+    width: 70%;
+    height: auto;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #ccc;
+    position: relative;
+    left: 250px;
+    }
+    
+    label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+    }
+
+    input[type=file] {
+      display: block;
+      margin-top: 10px;
+  }
+    
+    /* input[type="text"],
+    input[type="email"],
+    input[type="password"], */
+    #edit_lastname,
+    #edit_email,
+    #edit_password,
+    #edit_firstname,
+    #edit_username,
+    #edit_ville,
+    #edit_pays,
+    .edit_textarea {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 1px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    }
+    
+    /* input[type="number"] */
+    #edit_age{
+    display: block;
+    width: 100px;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    }
+    
+    input[type="submit"] {
+    display: block;
+    width: 200px;
+    margin: auto;
+    padding: 10px;
+    background-color: #505050;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    }
+    
+    input[type="submit"]:hover {
+    background-color: #212121;
+    }
+    
+    .edit_textarea {
+    height: 150px;
+    resize: none;
+    }
+    
+
+    #edit_label{
+      color: black;
+      position: relative;
+      left: -99px;
+      width: 244px;
+    }
+    
+    
+    
+    
+    
+  

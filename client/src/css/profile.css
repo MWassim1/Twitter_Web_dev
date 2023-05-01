@@ -3,81 +3,530 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 1rem;  
   background-color: #333;
-  color: #fff;
 }
 
 .header-logo {
   height: 50px;
 }
 
-.logout-button-section {
-  display: flex;
-  align-items: center;
-  margin-left: auto;
+.logout-button-profile {
+  background-color: white;
+  position: relative;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  margin-left: 1600px;
+  left: 1450px;
+  cursor: pointer;
 }
 
-.return-button-section {
-  display: flex;
-  align-items: center;
-  margin-left: 0.5rem
+.logout-button-profile:hover {
+  background-color: #333;
+  color: white;
 }
 
-/* Zone de profil */
-.profile-section {
-  display: flex;
-  margin: 1rem;
+.return-button:hover {
+  background-color: #333;
+  color: white;
 }
+
+.return-button{
+  background-color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 20px;
+  position: relative;
+  left: 1450px;
+}
+
 
 .profile-picture {
   height: 150px;
-  margin-right: 1rem;
+  margin-top: 20px;
+  border-radius: 10px;
+  position: relative;
+  left: -220px;
 }
 
+.comment-profile {
+  position: relative;
+  border-radius: 20px;
+  width: 630px;
+  margin-bottom: 20px;
+  top: -90px;
+}
 .profile-info {
-  margin-right: 1rem;
+  border: 1px solid rgb(137, 137, 137);
+  border-radius: 10px;
+  margin-top: 20px;
+  position: relative;
+  width: 500px;
+  left: -200px;
+  
 }
 
-/* Liste d'amis */
+.profile-comment-section {
+    position: relative;
+    top: -189px;
+    left: -130px;
+    margin-top: 200px;
+    width: 650px;
+    height: 300px;
+}
+
+.profile-comment-section h2 {
+  margin-bottom: 0px;
+  margin-top: 50px;
+}
+
+.profile-comment-section textarea {
+  border: 2px solid rgb(132, 132, 132);
+  border-radius: 15px;
+  resize: none;
+  width: 100%;
+  height: 200px;
+  margin-top: 10px;
+}
+
+.profile-comment-section button {
+  border: none;
+  color: #ffffff;
+  background-color: #474747;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.profile-comment-section button:hover {
+  background-color: #2e2e2e;
+}
+
 .friend-list {
-  margin-left: 300px;
+  margin: 20px;
+  max-width: 200px;
+  border: 2px solid rgb(139, 139, 139);
+  border-radius: 20px;
+  height: 50vh;
+  position: relative;
+  top: -500px;
+  left: 450px;
+  width: 200px;
+
+}
+#not_my_page_friend_list{
+  margin: 20px;
+  max-width: 200px;
+  border: 2px solid rgb(139, 139, 139);
+  border-radius: 20px;
+  height: 50vh;
+  position: relative;
+  top: 100px;
+  left: 10px;
+  width: 200px;
+
+}
+
+#not_my_page_friend_list2{
+  margin: 20px;
+  max-width: 200px;
+  border: 2px solid rgb(139, 139, 139);
+  border-radius: 20px;
+  height: 50vh;
+  position: absolute;
+  top: 190px;
+  left: 1630px;
+  width: 200px;
+
+}
+
+.friend-list h3 {
+  margin: 10px 0;
 }
 
 .friend-list ul {
-  list-style: none;
+  list-style-type: none;
+  margin: 0;
   padding: 0;
 }
 
 .friend-list li {
-  margin-bottom: 0;
+  margin-bottom: 10px;
 }
 
-/* Supprimer les marges du body */
-body {
-  margin: 0;
+.profile-section {  
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
 }
 
-.new-comment-section {
-  margin-left: 2rem;
+.profile-body{
+
+    background-color: white;
+    min-height:1093px;
+    height: 100%; 
+    width: 100%;   
 }
 
-.comment-list-section {
-  margin-left: 2rem;
+.comment_profile {
+  border: 2px solid rgb(205, 205, 205);
+  border-radius: 20px;
+  padding: 10px;
+  margin-bottom: 20px;
+  margin-right: 70px;
+  cursor: pointer;
+  height: auto;
+  width: 1000px;
 }
 
-/* Boutons */
-button {
-  background-color: #ccc;
-  color: #333;
+.comment_profile2 {
+  border: 2px solid rgb(205, 205, 205);
+  border-radius: 20px;
+  padding: 10px;
+  margin-bottom: 20px;
+  margin-right: 70px;
+  cursor: pointer;
+  height: auto;
+  width: 1000px;
+  position: relative;
+  top: -200px;
+}
+
+#comment-profile2{
+  position: relative;
+  top: 150px;
+}
+
+.comment_profile2 button {
   border: none;
-  border-radius: 5px;
-  padding: 0.5rem 1rem;
+  color: #ffffff;
+  background-color: #474747;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 2px;
+  margin-right: 1745px;
+  margin-bottom: 1px;
+  position: relative;
+  top : 30px
+}
+.not_my_page_comment-profile{
+  position: relative;
+
+}
+#not_my_page_profile-info{
+  position: relative;
+  width: 500px;
+  left: 400px;
+
+}
+
+#not_my_page_nopost{
+  position: relative;
+  top: 200px;
+  left: -600px;
+
+}
+.not_my_profile-picture{
+  margin-top: 10px;
+  max-width: 200px;
+  max-height: 150px;
+  width: auto;
+  height: auto;
+}
+
+.ul_list_options_profile{
+  position: relative;
+  display: block;
+  top: -165px;
+  left: 765px;
+  width: 195px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  visibility: hidden;
+  cursor: pointer;
+  background-color:  #f1f1f1;
+}
+
+.ul_options_profile{
+  font-size: 12px;
+  position: relative;
+  left: 485px;
+  top: -130px;
+  width: 40px;
+  margin: auto;
+}
+
+.nb-comment_profile {
+  position: relative;
+  font-size: 15px;
+  left : -550px;
+  top : 114px
+}
+
+.nb-comment2_profile {
+  position: relative;
+  font-size: 15px;
+  left : -733px;
+  top : 143px
+}
+
+.icon-comment_profile {
+  height: 50px;
+  max-width: 100%;
+  margin-right: 720px;
+  margin-bottom: 1px;
+  position: relative;
+  left :-20px;
+  top : -13px
+}
+
+.dot_profile{
+  background-color: #2e2e2e;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  margin-top: 4px;
+  margin-left: 15px;
+
+}
+
+.comment_profile button {
+  border: none;
+  color: #ffffff;
+  background-color: #474747;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 2px;
+  margin-right: 1745px;
+  margin-bottom: 1px;
+  position: relative;
+  top : 30px
+}
+
+#text_friend{
+  color: black;
+  cursor: pointer;
+  margin-bottom: 1px;
+  margin-top: 1px;
+
+
+}
+
+#text_friend:hover{
+  background-color: #f1f1f1;
+}
+
+#no_profile_picture{
+  border: 2px solid rgb(139, 139, 139);
+  position: relative;
+  height: 150px;
+  margin-top: 20px;
+  border-radius: 10px;
+  left: -220px;
+  cursor: pointer;
+
+}
+
+#p_no_picture{
+  color: black;
+  position: relative;
+  top: 23px;
+  margin-left: 5px;
+  margin-right:5px;
+}
+
+#img_no_picture{
+
+  position: relative;
+  height: 50px;
+  top: 16px;
+  left: -6px;
+}
+
+#no_profile_picture:hover{
+
+  background-color: #f1f1f1;
+}
+
+
+#p_no_age{
+  margin-bottom: 1px;
   cursor: pointer;
 }
 
-/* Commentaires */
-textarea {
-  width: 300px;
-  height: 100px;
+#p_no_age:hover {
+  background-color: #f1f1f1;
 }
+
+
+#p_no_bio:hover{
+  background-color: #f1f1f1;
+
+}
+#p_no_bio{
+  margin-top: 1px;
+  cursor: pointer;
+}
+
+.list_options_friend{
+  position: relative;
+  display: block;
+  left: -40px;
+  top: -1px;
+  visibility: hidden;
+  width: 155px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  background-color:  #f1f1f1;
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+.list_options_friend p {
+  font-size: 15px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  position: relative;
+}
+
+.list_options_friend p:hover {
+  background-color: white;
+}
+
+.delete_friend_icon{
+  width: 21px;
+  margin-left: 5px;
+}
+
+#not_my_page_profile_picture{
+  background-color: white;
+  height: 150px;
+  margin-top: 20px;
+  border-radius: 10px;
+  position: relative;
+  left: -220px;
+}
+#not_my_page_p_no_picture{
+  color: white;
+}
+
+#popup_delete{
+  visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#text_popup_delete{
+  position: relative;
+  padding: 32px;
+  width: 100%;
+  max-width: 640px;
+  height: 100px;
+  background-color: white;
+}
+
+#del_pop_button{
+  background-color: #333;
+  color: white;
+  position: absolute;
+  top: 580px;
+  left: 834px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#cancel_pop_button{
+  color: white;
+  background-color: #333;
+  position: absolute;
+  top: 580px;
+  left: 1020px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#cancel_pop_button:hover{
+  background-color: #2e2e2e;
+}
+
+#del_pop_button:hover{
+  background-color: #2e2e2e;
+}
+
+
+#popup_confirm_msg{
+  visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#confirm_pop_msg_button{
+  color: white;
+  background-color: #333;
+  position: absolute;
+  top: 580px;
+  left: 950px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#confirm_pop_msg_button:hover{
+  background-color: #2e2e2e;
+}
+
+.profile-picture{
+  max-width: 200px;
+  max-height: 150px;
+  width: auto;
+  height: auto;
+}
+
+.nb-comment3_profile{
+  position: relative;
+  left: -543px;
+  top: 150px;
+}
+
+#div_textarea_notmypage{
+  border: 2px solid rgb(132, 132, 132);
+  border-radius: 15px;
+  resize: none;
+  width: 100%;
+  height: 200px;
+  margin-top: 10px;
+}
+
+#button_for_edit_profile{
+  border: none;
+  color: #ffffff;
+  background-color: #474747;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  top: 250px;
+  left: -340px;
+}
+#button_for_edit_profile:hover{
+  background-color: #2e2e2e;
+}
+

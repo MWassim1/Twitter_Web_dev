@@ -1,0 +1,84 @@
+#body_about {
+    width: auto;
+    height: 1079px;
+    background-color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* En-tête */
+#header_about {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #333;
+  }
+  
+  /* Logo */
+  .header-logo {
+    height: 50px;
+  }
+  
+  /* Bouton de déconnexion */
+  .return-button {
+    background-color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .logout-button-profile:hover {
+    background-color: #333;
+    color: white;
+  }
+  
+  /* Bouton d'accueil */
+  .logout-button-profile {
+    background-color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 20px;
+  }
+  
+  .return-button:hover {
+    background-color: #333;
+    color: white;
+  }
+  
+
+#main_about {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+#h2_about {
+    color: black;
+    margin-top: 40px;
+    font-size: 24px;
+    font-weight: normal;
+}
+#p_about {
+    line-height: 1.5;
+}
+ul #ul_about{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.li_about{
+    margin-bottom: 10px;
+    list-style-type: none;
+    color: black;
+}
+#a_about {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  

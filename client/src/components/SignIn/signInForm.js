@@ -12,8 +12,11 @@ import axios from "axios"
 function SignInForm(props){
   axios.defaults.withCredentials = true
   const axiosUrl = "http://localhost:7000/api/login"
-  const axiosUrlLogin = "http://localhost:7000/api/getlogin"
+  const axiosUrlLogin = "http://localhost:7000/api/getsession"
   const axiosSetLogin = "http://localhost:7000/api/setlogin"
+  const axiosUrlGetSession = "http://localhost:7000/api/getsession/"
+  const axiosSaveSession = "http://localhost:7000/api/savesession"
+
   const navigate = useNavigate()
 
   const [connexion,setConnexion] =useState({
@@ -29,14 +32,24 @@ function SignInForm(props){
       if(res.data.loggedIn === true){
         console.log(res.data.user)
         console.log(res.data.user._id)
-        navigate('/Home/'+`${res.data.user._id}`)
 
+        axios.get(axiosUrlGetSession+res.data.user._id)
+        .then(res3=>{
+          console.log("RES3 ",res3.data.session,'Home/'+`${res3.data.session}`)
+          navigate(`${res3.data.session}`)
+        })
+        .catch((err3)=>{console.log(err3)})
+        
       }
 
     }).catch((err)=>{console.log(err)})
   },[])
 
-  
+  const onEnterKey = (evt) => {
+    if(evt.keyCode === 13 && evt.shiftKey === false) {
+      handleSubmit(evt)
+    }
+  }
     
     const handleSubmit = (evt) => {
       evt.preventDefault()
@@ -46,8 +59,15 @@ function SignInForm(props){
         console.log(res)
         axios.put(axiosSetLogin,{id: res.data._id,email : res.data.email,password: res.data.password, isconnected :true})
           .then((res2)=>{
-            console.log(res)
-            navigate('/Home/'+`${res.data._id}`)
+            axios.put(axiosSaveSession,{user_id:res.data._id,session:"/Home/"+res.data._id})
+            .then(res3=>{
+              axios.get(axiosUrlGetSession+res.data._id)
+              .then(res4=>{
+                navigate(`${res4.data.session}`)
+              })
+              .catch((err4)=>{console.log(err4)})
+            })
+            .catch((err3)=>{console.log(err3)})
           })
           .catch((err2)=>console.log(err2.response))
         //.log(res.data)
@@ -61,7 +81,7 @@ function SignInForm(props){
       setConnexion({...connexion,[name]:value})
       }
 
-    return <div><div id="body" ><Header title="Page de connexion"></Header><h1>Connexion</h1><form action="submit" onSubmit={handleSubmit} > 
+    return <div><div id="body" ><Header title="Page de connexion"></Header><h1>Connexion</h1><form action="submit" onKeyDown={onEnterKey} onSubmit={handleSubmit} > 
     <p id='check_syntaxe'></p>
 		<label htmlFor="email"><input type="text" id="email" name="email" placeholder="Adresse email" value={connexion.email} onChange={handleChange} /></label><br/><br/>
 		<label htmlFor="password"><input  type="password" id="password" name="password" placeholder="Mot de Passe" value={connexion.password} onChange={handleChange} autoComplete="on" ></input></label><br/><br/>

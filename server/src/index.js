@@ -15,6 +15,8 @@ const cors = require('cors');
 const app = require('./app');
 
 
+server.use(express.json({limit: '50mb'}));
+server.use(express.urlencoded({limit: '50mb'}));
 
 // Cookies
 server.use(cookieParser())

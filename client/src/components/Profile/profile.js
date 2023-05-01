@@ -4,17 +4,11 @@ import Profile_header from "./profile_header"
 import '../../css/profile.css'
 
 
-
 function Profile(props){
-
-
-
-
     return <div><Header title="Profil"></Header>
                 <Profile_header></Profile_header>
                 <Profile_area></Profile_area>
-       
-    </div>
+            </div>
 }
 
 export default Profile
