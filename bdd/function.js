@@ -6,6 +6,7 @@ const FriendModel = require('./models/friend.model')
 const CommentModel = require('./models/comment.model')
 const FollowModel = require('./models/followers.model')
 const SessionModel =  require('./models/session.model')
+const RequestFriend = require('./models/requestfriend.model')
 
 // hash
 const bcrypt = require('bcrypt')
@@ -21,7 +22,6 @@ module.exports.formSignIn = async (req,res)=>{
     const {email,password} = req.body
     let k_email = email.trim()
     const check_user  = (await FormModel.findOne({email: k_email}))
-    console.log(check_user)
     if(check_user === null ){
         return res.status(401).send("Compte inexistant")
     }
@@ -67,7 +67,6 @@ module.exports.formSignUp = async (req,res) => {
             })
             .save()
             .then((new_user)=>{
-                console.log(new_user)
                 return res.status(201).json(new_user)
             })
             .catch((err)=>{res.status(500).json(err)})
@@ -90,14 +89,12 @@ module.exports.logout = async (req,res) => {
 module.exports.user_id = async(req,res)=>{
     const user = await FormModel.findById(req.body)
     if(user===null){
-        console.log("401")
         return res.status(401).send(user)
     }
     return res.status(200).send(user)
 }
 
 module.exports.new_post= async(req,res)=>{
-    //console.log(req.body) 
     const {user_id,username,post} = req.body
     const new_post = await PostModel.create({
         user_id:user_id,
@@ -110,10 +107,8 @@ module.exports.new_post= async(req,res)=>{
 module.exports.get_post=async(req,res)=>{
 
     const posts = await PostModel.find()
-    console.log(Object.keys(posts).length)
     if(posts[0]!==undefined){
         const date = posts[0].createdAt
-        console.log(date.getHours()+':'+date.getMinutes()+ ' - '+ date.getDate()+'/' + (date.getMonth()+1) + '/'+date.getFullYear())
         return res.status(200).send(posts)
     }
     return res.status(403)
@@ -160,7 +155,6 @@ module.exports.islogged = async(req,res)=>{
     if(user.length === 0){
       return  res.status(401).send(req.body)
     }
-    console.log(user[0].isconnected)
     return res.status(200).send(user[0].isconnected)
     
 }
@@ -180,6 +174,10 @@ module.exports.setUser = async (req,res)=>{
     const user_ObjectId = new ObjectId(req.params.id)
     const {lastname,firstname,email,username,password,profile_picture,bio,age,pays,ville} = req.body
     const user  = await UserModel.find({id :req.params.id})
+    const check_user = await FormModel.find({email:email})
+    if(check_user.length >=1 && (check_user[0]._id).toString() !== req.params.id){
+        return res.status(403).send("Erreur l'adresse mail est déjà utlisée. Essayez une autre adresse.")
+    }
     if(user.length === 0){
         bcrypt.hash(password,salt)
         .then(async hash=>{
@@ -198,11 +196,14 @@ module.exports.setUser = async (req,res)=>{
             
             })
             .then(async (new_user)=>{
-                console.log(new_user)
                 await FormModel.updateOne({_id:user_ObjectId},{$set : {lastname:lastname,firstname:firstname,email:email,username:username,password:hash}})
                 .then(async res=>{console.log(res)
                         await LoginModel.updateOne({id:req.params.id},{$set : {email:email,password:hash}})
-                            .then(res=>{console.log(res)})
+                            .then(async res=>{console.log(res)
+                                await PostModel.updateMany({user_id:req.params.id},{$set : {username:username}})
+                                .then(res=>{console.log(res)})
+                                .catch((err)=>{console.log(err)})
+                            })
                             .catch((err)=>{console.log(err)})
                 })
                 .catch(err=>{console.log(err)})
@@ -221,7 +222,11 @@ module.exports.setUser = async (req,res)=>{
                     await FormModel.updateOne({_id:user_ObjectId},{$set : {lastname:lastname,firstname:firstname,email:email,username:username,password:hash}})
                     .then(async res=>{
                         await LoginModel.updateOne({id:req.params.id},{$set : {email:email,password:hash}})
-                        .then(res=>{console.log(res)})
+                        .then(async res=>{console.log(res)
+                                await PostModel.updateMany({user_id:req.params.id},{$set : {username:username}})
+                                .then(res=>{console.log(res)})
+                                .catch((err)=>{console.log(err)})
+                        })
                         .catch((err)=>{console.log(err)})
                     })
                     .catch(err=>{console.log(err)})
@@ -232,8 +237,7 @@ module.exports.setUser = async (req,res)=>{
             })
             .catch((err)=>{console.log(err);res.status(500).json(err)})
         }
-    // const user_updated = await UserModel.updateOne({id:req.params.id},{$set : {lastname:lastname,firstname:firstname,email:email,username:username,password:password,bio:bio,age:age,pays:pays,ville:ville}})
-    // return res.status(200).send(user_updated)
+
 
 }
 
@@ -282,6 +286,11 @@ module.exports.delPost = async(req,res) =>{
     return res.status(200).send(post_deleted)
 }
 
+module.exports.filterPost = async(req,res) =>{
+    const posts = await PostModel.find({post:{$regex:req.params.filter}})
+    return res.status(200).send(posts)
+}
+
 module.exports.addFriend = async(req,res) =>{
     const friends = await FriendModel.findOne({user_id:req.params.id1})
     const friends2 = await FriendModel.findOne({user_id:req.params.id2})
@@ -309,7 +318,6 @@ module.exports.addFriend = async(req,res) =>{
     if(Object.keys(friends.friends_id).find(key => friends.friends_id[key] === req.params.id2) !== undefined){ // Donc ils sont déjà amis 
         return res.status(208).send(friends)
     }
-    // console.log(friend2)
     if(friends2 === null){
         await FriendModel.create({
             user_id : req.params.id2,
@@ -437,6 +445,21 @@ module.exports.addFollow = async(req,res)=>{
     return res.status(200).send(user_followed_updated)
 }
 
+module.exports.delFollow = async (req,res) =>{
+    const user1= await FollowModel.find({user_id:req.params.id})
+    const user2  = await FollowModel.find({user_id:req.params.id_follow})
+
+
+    delete user1[0].follow[Object.keys(user1[0].follow).find(key => user1[0].follow[key] === req.params.id_follow )]
+    delete user2[0].followedBy[Object.keys(user2[0].followedBy).find(key => user2[0].followedBy[key] === req.params.id )]
+
+    const user1_deleted = user1[0].follow.filter(x=> x!== undefined)
+    const user2_deleted = user2[0].followedBy.filter(x => x !== undefined)
+    await FollowModel.updateOne({user_id:req.params.id},{$set : {follow:user1_deleted}})
+    await FollowModel.updateOne({user_id:req.params.id_follow},{$set : {followedBy:user2_deleted}})
+    return res.status(200).send("ok")
+    
+}
 module.exports.getFollowers = async(req,res)=>{
     const getfollowers = await FollowModel.find({user_id:req.params.id_follow})
     if(getfollowers.length === 0 ){
@@ -447,9 +470,7 @@ module.exports.getFollowers = async(req,res)=>{
 
 module.exports.getUserByName = async(req,res) =>{
     const users = await FormModel.find({username : {$regex : "^"+req.params.username}})
-    console.log("USERS : ",users,req.params.username)
     if(users.length === 0){
-        console.log("ok")
         return res.status(404).send("No users found")
     }
     return res.status(200).send(users)
@@ -473,4 +494,61 @@ module.exports.saveSession = async (req,res)=>{
 module.exports.getSession = async(req,res) =>{
     const session = await SessionModel.find({user_id:req.params.user_id})
     return res.status(200).send(session[0])
+}
+
+module.exports.isMyFriend = async (req,res) =>{
+
+    const user = await FriendModel.find({user_id:req.params.id1})
+    if(user.length === 0){
+        return res.status(200).send({ismyfriend :false})
+    }
+    return res.status(200).send({ismyfriend :(user[0].friends_id).includes(req.params.id2)})
+}
+
+module.exports.addToFriendList = async(req,res)=>{
+    const  user = await RequestFriend.find({user_id:req.params.id2})
+    const id_user = new ObjectId(req.params.id1)
+    const user1 = await FormModel.find({_id:id_user})
+    if(user.length === 0){
+        const new_user = await RequestFriend.create({
+            user_id : req.params.id2,
+            friends_id : req.params.id1,
+            friends_login:user1[0].username
+
+        })
+        return res.status(201).send(new_user)
+    }
+    const user_updated = await RequestFriend.updateOne({user_id:req.params.id2},{$set : {friends_id : user[0].friends_id.concat(req.params.id1) , friends_login : user[0].friends_login.concat(user1[0].username)}})
+    return res.status(200).send(user_updated)
+}
+
+module.exports.getFriendRequest = async (req,res) =>{
+    const  user = await RequestFriend.find({user_id:req.params.id})
+    return res.status(200).send(user)
+}
+
+module.exports.resFriendRequest = async (req,res) =>{
+    const {user_login,user_id} = req.body
+
+    const user = await RequestFriend.find({user_id:req.params.id})
+
+    delete user[0].friends_id[Object.keys(user[0].friends_id).find(key => user[0].friends_id[key] === user_id)]
+    delete user[0].friends_login[Object.keys(user[0].friends_login).find(key => user[0].friends_login[key] === user_login)]
+
+    const friends_id_updated = user[0].friends_id.filter(x=> x!== undefined)
+    const friends_login_updated = user[0].friends_login.filter(x=> x!== undefined)
+
+    await RequestFriend.updateOne({user_id:req.params.id},{$set : {friends_id:friends_id_updated,friends_login:friends_login_updated}})
+
+    return res.status(200).send("OK")
+
+}
+
+module.exports.waitResFR = async (req,res) =>{
+    const user = await RequestFriend.find({user_id:req.params.id2})
+    if(user.length === 0 ){
+        return res.status(200).send({alreadyAsk :false })
+
+    }
+    return res.status(200).send({alreadyAsk :(user[0].friends_id).includes(req.params.id1) })
 }

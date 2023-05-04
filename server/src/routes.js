@@ -77,12 +77,17 @@ module.exports=function(router){
   .delete("/api/post/comment/:id_post",(req,res)=>{
     console.log("/api/post/comment/:id_post")
   })
-  .put("/api/user/:id/:id_follow",(req,res)=>{
+  .put("/api/user/follow/:id/:id_follow",(req,res)=>{
     console.log("/api/user/:id/:id_follow")
   })
   .get("/api/user/followers/:id_follow",(req,res)=>{
     console.log("/api/user/followers/:id_follow")
   })
+  .delete("/api/user/follow/:id/:id_follow",(req,res)=>{
+    console.log.delete("/api/user/follow/:id/:id_follow")
+
+  })
+
   .get("/api/users/:username",(req,res)=>{
     console.log("/api/users/:username")
   })
@@ -99,9 +104,24 @@ module.exports=function(router){
   .get("/api/userinfo/:id",(req,res)=>{
     console.log("/api/userinfo/:id")
   })
-
-
-
+  .get("/api/friend/:id1/:id2",(req,res)=>{
+    console.logget("/api/friend/:id1/:id2")
+  })
+  .get("/api/posts/:filter",(req,res)=>{
+    console.log("/api/posts/:filter")
+  })
+  .put("/api/friendlist/:id1/:id2",(req,res)=>{
+    console.log("/api/friendlist/:id1/:id2")
+  })
+  .get("/api/friendlist/:id",(req,res)=>{
+    console.log("/api/friendlist/:id")
+  })
+  .put("/api/friendlist/:id",(req,res)=>{
+    console.log("/api/friendlist/:id")
+  })
+  .get("/api/friendlist/:id1/:id2",(req,res)=>{
+    console.log("/api/friendlist/:id1/:id2")
+  })
 }
 
 

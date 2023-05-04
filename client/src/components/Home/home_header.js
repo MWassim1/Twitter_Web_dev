@@ -2,6 +2,7 @@ import '../../css/acceuil.css';
 import {Link,useNavigate} from 'react-router-dom'
 import axios from "axios"
 import Logo from "../../logo.png"
+import Post from "../../image/post.png"
 
 
 
@@ -13,7 +14,9 @@ function Home_header(props){
   
   const axiosUrl = "http://localhost:7000/api/user/logout"
   const axiosUrlUser = "http://localhost:7000/api/user/:id"
+  const axiosSaveSession = "http://localhost:7000/api/savesession"
   const axiosUrlGetUser = "http://localhost:7000/api/users/"
+
   const url = window.location.href
   const last_slash = url.lastIndexOf('/')
   const id = url.slice(last_slash+1)
@@ -25,8 +28,6 @@ function Home_header(props){
       evt.preventDefault()
       axios.post(axiosUrlUser,{_id:`${id}`})
       .then((res)=>{
-        console.log(res.data)
-        console.log(res.data._id)
         axios.put(axiosUrl,{id:res.data._id, email : res.data.email , password : res.data.password, isconnected : false } ) 
         .catch((err)=> console.log(err.response))
         navigate('/')
@@ -35,13 +36,10 @@ function Home_header(props){
     }
    
     const handleChange = (evt) =>{
-      //console.log(axiosUrlGetUser+evt.target.value)
-      if(evt.target.value.trim() != ""){
+      if(evt.target.value.trim() !==""){
         axios.get(axiosUrlGetUser+evt.target.value)
             .then((res)=>{
-                console.log("RES : ",res)
                 if(res.status === 200){
-                  console.log(res.data,res.data.length)
                   del_user()
                   getUsersInfos(res.data)
                 }
@@ -75,7 +73,6 @@ function Home_header(props){
       }
     }
     const create_user = (username,login) =>{
-        console.log(username,login)
         let users_list = document.getElementById("listeusers")
 
         let new_li = document.createElement('li')
@@ -85,7 +82,6 @@ function Home_header(props){
         new_li.appendChild(new_username_text)
         new_li.addEventListener('click',goToUserPage)
 
-        console.log(users_list,new_li)
 
         users_list.appendChild(new_li)
        
@@ -93,9 +89,7 @@ function Home_header(props){
        
     }
     function goToUserPage(){
-      console.log(this,this.innerHTML)
-      console.log("CLASS : ",this.className)
-      navigate('/profile/'+id+'/'+`${this.className}`)
+      navigate(`/profile/${id}/${this.className}`)
 
     }
     
@@ -103,14 +97,24 @@ function Home_header(props){
     const del_user = ()=>{
       let users  = document.getElementsByTagName("li")
       let users_list = document.getElementById("listeusers")
-      console.log("ICI :", users,users.length)
-      while(users.length > 3){
+      while(users.length > 4){
         users_list.removeChild(users_list.lastElementChild)
       }
     }
 
     const handleClickProfile = (evt) =>{
       navigate('/profile/'+id)
+    }
+    
+    const handleSubmitFilter = (evt) =>{
+      axios.put(axiosSaveSession,{user_id:id,session:`/filter/${id}/${evt.target.value}`})
+      navigate('/filter/'+id+"/"+evt.target.value)
+    }
+    
+    const onEnterKey = (evt) => {
+      if(evt.keyCode === 13 && evt.shiftKey === false) {
+        handleSubmitFilter(evt)
+      }
     }
 
     return (<div>
@@ -120,6 +124,10 @@ function Home_header(props){
         <input type="text" className="search-bar" placeholder="Rechercher utilisateur..." onChange={handleChange} />
       </div>
       <div className="profile-button-section">
+      <div className="search-bar-post-section">
+        <input type="text" className="search-bar-post" placeholder="Rechercher post..." onKeyDown={onEnterKey} />
+        <img id='icon-post' src={Post} alt='icon-post'></img>
+      </div>
       <button className="profile-button" onClick={handleClickProfile}>Mon profil</button>
       </div>
       <div className="logout-button-section">

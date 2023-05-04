@@ -27,15 +27,9 @@ function SignInForm(props){
   useEffect(()=>{
     axios.get(axiosUrlLogin)
     .then((res)=>{
-      console.log(res)
-      console.log(res.data.loggedIn)
       if(res.data.loggedIn === true){
-        console.log(res.data.user)
-        console.log(res.data.user._id)
-
         axios.get(axiosUrlGetSession+res.data.user._id)
         .then(res3=>{
-          console.log("RES3 ",res3.data.session,'Home/'+`${res3.data.session}`)
           navigate(`${res3.data.session}`)
         })
         .catch((err3)=>{console.log(err3)})
@@ -43,6 +37,7 @@ function SignInForm(props){
       }
 
     }).catch((err)=>{console.log(err)})
+    // eslint-disable-next-line
   },[])
 
   const onEnterKey = (evt) => {
@@ -56,7 +51,6 @@ function SignInForm(props){
       axios.post(axiosUrl,connexion)
 		  .then(res=>{
 			if(res.status ===200){
-        console.log(res)
         axios.put(axiosSetLogin,{id: res.data._id,email : res.data.email,password: res.data.password, isconnected :true})
           .then((res2)=>{
             axios.put(axiosSaveSession,{user_id:res.data._id,session:"/Home/"+res.data._id})
@@ -70,7 +64,6 @@ function SignInForm(props){
             .catch((err3)=>{console.log(err3)})
           })
           .catch((err2)=>console.log(err2.response))
-        //.log(res.data)
 
 			}
 		}).catch((err)=> console.log(err.response))

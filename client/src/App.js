@@ -9,6 +9,11 @@ import NotFound from './components/x/notfound';
 import Comments from './components/x/post';
 import Abouts from './components/Propos/about';
 import EditProfile from './components/formulaire/edit_profile';
+import FilterPost from './components/x/filter_post';
+import FriendRequest from './components/Friend/friendRequest';
+import Follows from './components/Follow/follows';
+import Followers from './components/Follow/followers';
+
 
 function App() {
   
@@ -17,12 +22,14 @@ function App() {
     <Routes>
       <Route path="/" element={<SignInForm></SignInForm>}></Route>
       <Route element={<ProtectedRoutes></ProtectedRoutes>}>
-        {/* <Route path='/profile/*' element={<Profile></Profile>}></Route> */}
         <Route path='/post/*' element={<Comments/>}></Route>
         <Route path="/Home/*" element={<Home/>}></Route>
         <Route path='/profile/*' element={<Profile></Profile>}></Route>
         <Route path='/editprofile/*' element={<EditProfile/>}></Route>
-        {/* <Route path='/editprofile/' element={<EditProfile/>}></Route> */}
+        <Route path='/filter/*' element={<FilterPost/>}></Route>
+        <Route path='/friendrequest/*' element={<FriendRequest/>}></Route>
+        <Route path='/follows/*' element={<Follows/>}></Route>
+        <Route path='/followers/*' element={<Followers/>}></Route>
       </Route>
         <Route path='/Home/' element={<NotFound/>}></Route>
         <Route path="/SignUp" element={<SignUpForm/>}></Route>

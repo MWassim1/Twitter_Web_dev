@@ -43,7 +43,7 @@
 .nb-comment-post {
     position: relative;
     font-size: 15px;
-    left : -640px;
+    left : -560px;
     top : 71px;
   }
 
@@ -94,4 +94,18 @@
     margin-top: 50px;
     margin-left: 200px; 
 
+  }
+
+  .icon-pp-post-comment{
+    width: 50px;
+    position: relative;
+    left:-570px ;
+    border-radius: 50px;
+  }
+
+  .icon-pp-post{
+    width: 65px;
+    border-radius: 50px;
+    position: relative;
+    left: -570px;
   }

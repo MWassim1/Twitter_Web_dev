@@ -5,6 +5,8 @@ import Navbar from '../Home/navbar'
 import { useNavigate } from 'react-router-dom';
 import axios from "axios"
 import CommentIcon from "../../image/commenter.png"
+import DefaultPP from "../Profile/1.jpg"
+
 
 
 
@@ -21,8 +23,8 @@ function Post (props){
     const  axiosUrlGetPost = "http://localhost:7000/api/post2/"
     const axiosUrlGetCommentwPost = "http://localhost:7000/api/post/comment/"
     const axiosUrlPostComment = "http://localhost:7000/api/post/comment/"
+    const axiosUrlGetUserInfo = "http://localhost:7000/api/userinfo/"
     
-    console.log("ID : ",id,user_id)
     let nb_com = 0 
     let user_w_id = ""
     let alreadyLoaded = 0
@@ -37,7 +39,6 @@ function Post (props){
       if(alreadyLoaded === 0){
           axios.get(axiosUrlGetPost+id)
               .then(res =>{
-                console.log("RESSSS : ",res)
                   create_post(res.data)
                   alreadyLoaded = 1
               })
@@ -76,7 +77,6 @@ function Post (props){
     }
     
     const create_comment = async (data) =>{
-        console.log("DATA : ",data)
         let comment_list = document.getElementById("comment-list-section")
         console.log(comment_list)
 
@@ -109,8 +109,17 @@ function Post (props){
         // img :
   
         let new_icon_comment = document.createElement("img")
+        let new_icon_pp = document.createElement('img')
+        new_icon_pp.src = DefaultPP
         new_icon_comment.src = CommentIcon
-  
+
+        await axios.get(axiosUrlGetUserInfo+data.user_id)
+        .then(async res=>{
+            if(res.data !== "" && res.data.profile_picture !== ""){
+                new_icon_pp.src = res.data.profile_picture
+            }
+        }) 
+        .catch((err)=>{})
   
         // Création des texteNode : 
         let new_comment = document.createTextNode(data.comments)
@@ -154,21 +163,18 @@ function Post (props){
         new_p_for_owner.className = "comment-owner"
         new_p_for_nbcomment.className ="nb-comment-post"
         new_icon_comment.className="icon-comment-post"
+        new_icon_pp.className="icon-pp-post-comment"
         
+        new_div_for_comment.appendChild(new_icon_pp)
   
         new_div_for_comment.appendChild(new_p_for_comment)
         new_div_for_comment.appendChild(new_p_for_date)
         new_div_for_comment.appendChild(new_p_for_owner)
         new_div_for_comment.appendChild(new_br1_for_space)
         new_div_for_comment.appendChild(new_br2_for_space)
-        // new_div_for_comment.appendChild(new_p_for_nbcomment)
+       
         new_div_for_comment.className="comment-post2"
         
-        // new_div_for_comment.appendChild(new_button_)
-  
-        // new_div_for_comment.appendChild(new_icon_comment)
-        console.log(new_div_for_comment,comment_list)
-        // comment_list.appendChild(new_div_for_comment)
         comment_list.insertBefore(new_div_for_comment ,comment_list.firstChild.nextSibling)
   
 
@@ -216,7 +222,17 @@ function Post (props){
         // img :
   
         let new_icon_comment = document.createElement("img")
+        let new_icon_pp   = document.createElement("img")
+        new_icon_pp.src = DefaultPP
         new_icon_comment.src = CommentIcon
+
+        await axios.get(axiosUrlGetUserInfo+data.user_id)
+        .then(async res=>{
+            if(res.data !== "" && res.data.profile_picture !== ""){
+                new_icon_pp.src = res.data.profile_picture
+            }
+        }) 
+        .catch((err)=>{})
   
   
         // Création des texteNode : 
@@ -260,8 +276,9 @@ function Post (props){
         new_p_for_owner.className = "comment-owner"
         new_p_for_nbcomment.className ="nb-comment-post"
         new_icon_comment.className="icon-comment-post"
+        new_icon_pp.className="icon-pp-post"
         
-  
+        new_div_for_comment.appendChild(new_icon_pp)
         new_div_for_comment.appendChild(new_p_for_comment)
         new_div_for_comment.appendChild(new_p_for_date)
         new_div_for_comment.appendChild(new_p_for_owner)

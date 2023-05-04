@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Like Button</title>
+    <link rel="stylesheet" href="like.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body>
+
+    <div class="btns_like">
+        <Button onclick="Toggle1()" id="btnlike" class="btn"><i class="fas fa-heart"></i></Button>
+    </div>
+    
+    <script>
+    
+    //Variable contenant le bouton
+    var btnvar1 = document.getElementById('btnlike');
+
+        //Pour le changement de couleur 
+       function Toggle1(){
+                if (btnvar1.style.color =="red") {
+                    btnvar1.style.color = "grey"
+                }
+                else{
+                    btnvar1.style.color = "red"
+                }
+       }
+
+    </script>
+
+</body>
+
+</html>
+          

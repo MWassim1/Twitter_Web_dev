@@ -1,0 +1,23 @@
+
+.btns_like{
+    display: flex;
+
+}
+
+.btnlike{
+
+    /*Pour changer taille du coeur*/
+    font-size: 60px;
+    background: transparent;
+    border: none;
+    margin: 87px;
+    outline: none;
+    color: grey;
+    position: relative;
+    left: 300px;
+    top: -300px;
+    width: 500px;
+}
+
+
+            

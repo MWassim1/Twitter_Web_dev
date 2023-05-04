@@ -1,0 +1,182 @@
+
+
+#comment-section-filter{
+
+    background-color: white;
+    height: 100%;
+    min-height: 1000px;
+}
+
+
+.profile-button-filter{
+    background-color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    position: relative;
+    left: 750px;
+    top: -123px;
+  
+  }
+
+
+  .logout-button-filter{
+    background-color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    left: 180px;
+    top: -95px;
+  }
+
+.profile-button-filter:hover,
+.logout-button-filter:hover {
+  background-color: #333;
+  color: white;
+}
+
+
+.search-bar-post-filter {
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    font-size: 16px;
+    position: relative;
+    left: 515px;
+    top: -75px;
+  }
+
+  #icon-post-filter{
+    width: 30px;
+    position: relative;
+    left:477px;
+    top: -85px;
+    border-radius: 40px;
+  }
+
+  .search-bar-filter {
+    width: 300px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    font-size: 16px;
+    position: relative;
+    left: 100px;
+  }
+
+  #listeusers-filter{
+    color: white ;
+    font-size: 19px;
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 0; 
+    margin-left: 200px;
+    margin-top: 1px;
+    direction:rtl;
+    position: relative;
+    left: 100px;   
+  }
+
+  #filter-section {
+    background-color: white;
+  }
+
+  .center-section-filter {
+    float: left;
+    /* width: calc(100% - 200px); */
+    width: auto;
+    max-width: 1810px;
+    margin-left: 202px; 
+    margin-top: 0px;
+  }
+
+  .comment-filter {
+    border: 2px solid rgb(205, 205, 205);
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 20px;
+    margin-right: 70px;
+    cursor: pointer;
+    height: auto;
+    width: 900px;
+    position: relative;
+    left: 500px;
+  }
+
+  .comment-filter button {
+    border: none;
+    color: #ffffff;
+    background-color: #474747;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 2px;
+    margin-right: 1745px;
+    margin-bottom: 1px;
+    position: relative;
+    top : 30px
+  }
+  
+  .comment-filter button:hover {
+    background-color: #2e2e2e;
+  }
+  
+
+  .icon-comment-filter{
+    height: 50px;
+    max-width: 100%;
+    margin-right: 720px;
+    margin-bottom: 1px;
+    position: relative;
+    left :30px;
+    top : -13px
+  }
+
+  .nb-comment-filter {
+    position: relative;
+    font-size: 15px;
+    left : -420px;
+    top : 125px
+  }
+  
+  .nb-comment2-filter {
+    position: relative;
+    font-size: 15px;
+    left : -420px;
+    top : 135px
+  }
+
+  .ul_options-filter{
+    font-size: 12px;
+    position: absolute;
+    left: 865px;
+    top: -130px;
+    width: 20px;
+    top: 15px;
+    padding-left: 13px;
+  }
+
+  .ul_list_options-filter{
+    position: relative;
+    display: block;
+    top: -165px;
+    left: 650px;
+    width: 195px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    visibility: hidden;
+    cursor: pointer;
+    background-color:  #f1f1f1;
+  }
+
+  .icon-pp-filter-post{
+
+    width: 65px;
+    position: relative;
+    left: -420px;
+    border-radius: 50px;
+  }

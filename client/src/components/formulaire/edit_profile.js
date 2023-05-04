@@ -6,6 +6,8 @@ import axios from "axios"
 import { useNavigate } from "react-router-dom";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import CheckIcon from "../../image/check.webp"
+
 
 
 
@@ -130,11 +132,11 @@ function EditProfile(props){
     const handleSubmit = (evt) =>{
         evt.preventDefault()
         console.log("ACCOUNT : ",account)
-        // axios.put(axiosUrlUpdateUser+id)
-        //     .then((res)=>{
-        //         console.log("ok maj")
-        //     })
-        //     .catch((err)=>{console.log(err)})
+        axios.put(axiosUrlUpdateUser+id,account)
+            .then((res)=>{
+                document.getElementById("popup-confirm-edit").style.visibility = "visible"
+            })
+            .catch((err)=>{document.getElementById("popup-error-edit").style.visibility = "visible"})
     }
 
     const handleChange = (evt) => {
@@ -145,7 +147,13 @@ function EditProfile(props){
     const handleClickProfile = (evt) =>{
         navigate('/home/'+id)
     }
-
+    const handleClickgoProfile = (evt) =>{
+        document.getElementById("popup-confirm-edit").style.visibility = "hidden"
+        navigate('/profile/'+id)
+    }
+    const handleClickHide = (evt) =>{
+        document.getElementById("popup-error-edit").style.visibility = "hidden"
+    }
 
 
     return (
@@ -166,7 +174,7 @@ function EditProfile(props){
             <form id="edit-profile-form" action="/profile" method="put" onSubmit={handleSubmit}>
 
                 <label id="edit_label" htmlFor="profile-picture">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Photo de profil :</label>
-                <input accept="image/*" type="file" id="profile-picture" name="profile-picture" onChange={handleconvertImage}/><br/>
+                <input accept="image/*" type="file" id="profile-picture" name="profile_picture" onChange={handleconvertImage}/><br/>
 
                 <label id="edit_label" htmlFor="edit_lastname">Nom :<FontAwesomeIcon icon={faCheck} className={validLastname? "valid" : "hide"} /><FontAwesomeIcon icon={faTimes} className={validLastname || !lastname ? "hide" : "invalid"} /></label>
                 <input type="text" id="edit_lastname" name="lastname"ref={userRef} onChange={(e) => setLastname(e.target.value)} value={lastname} required aria-invalid={validLastname ? "false" : "true"} aria-describedby="lastname_alert" onFocus={() => setLastnameFocus(true)}onBlur={() => setLastnameFocus(false)} />
@@ -202,18 +210,27 @@ function EditProfile(props){
                 <input type="number" id="edit_age" name="age" min="7" max="99" onChange={handleChange}/><br/>
 
                 <label id="edit_label"  htmlFor="edit_ville" onChange={handleChange} >Ville :<FontAwesomeIcon icon={faCheck} className={validCity? "valid" : "hide"} /><FontAwesomeIcon icon={faTimes} className={validCity || !city ? "hide" : "invalid"} /></label>
-                <input type="text" id="edit_ville" name="ville" aria-describedby="pas" onChange={(e) => setCity(e.target.value)} value={city} required aria-invalid={validCity ? "false" : "true"} onFocus={() => setCityFocus(true)}onBlur={() => setCityFocus(false)}/><br/>
+                <input type="text" id="edit_ville" name="ville" aria-describedby="pas" onChange={(e) => setCity(e.target.value)} value={city} aria-invalid={validCity ? "false" : "true"} onFocus={() => setCityFocus(true)}onBlur={() => setCityFocus(false)}/><br/>
                 <p id="city_alert" className={cityFocus && !validCity ? "instructions" : "offscreen"}>
                 <FontAwesomeIcon icon={faInfoCircle} />Doit uniquement contenir des lettres.<br/></p>
 
                 <label id="edit_label" htmlFor="edit_pays" onChange={handleChange}>Pays :<FontAwesomeIcon icon={faCheck} className={validCountry? "valid" : "hide"} /><FontAwesomeIcon icon={faTimes} className={validCountry || !country ? "hide" : "invalid"} /></label>
-                <input type="text" id="edit_pays" name="pays" aria-describedby="pas" onChange={(e) => setCountry(e.target.value)} value={country} required aria-invalid={validCountry? "false" : "true"} onFocus={() => setCountryFocus(true)}onBlur={() => setCityFocus(false)}/><br/>
+                <input type="text" id="edit_pays" name="pays" aria-describedby="pas" onChange={(e) => setCountry(e.target.value)} value={country} aria-invalid={validCountry? "false" : "true"} onFocus={() => setCountryFocus(true)}onBlur={() => setCityFocus(false)}/><br/>
                 <p id="country_alert" className={countryFocus && !validCountry ? "instructions" : "offscreen"}>
                 <FontAwesomeIcon icon={faInfoCircle} />Doit uniquement contenir des lettres.<br/></p>
 
                 <input type="submit" id="edit-profile-submit" value="Enregistrer les modifications"/>
             </form>
 	    </div>
+        <div id="popup-confirm-edit">
+        <p id="text_popup_confirm-edit">Compte mis à jour <img id="img_popup_confirm" src={CheckIcon}/></p>
+        <button id="confirm_edit_pop_button" onClick={handleClickgoProfile} >OK</button>
+        </div>
+
+        <div id="popup-error-edit">
+        <p id="text_popup_error-edit">Erreur l'adresse mail est déjà utlisée. Essayez une autre adresse.</p>
+        <button id="confirm_error_pop_button" onClick={handleClickHide} >OK</button>
+        </div>
      </div>
 
     )

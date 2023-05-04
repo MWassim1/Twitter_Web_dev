@@ -156,6 +156,81 @@
     
     
     
+    #popup-confirm-edit{
+      visibility: hidden;
+      background-color: rgba(0, 0, 0, 0.2);
+      width: 100%;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      position: fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #img_popup_confirm{
+      width: 50px;
+      position: relative;
+      top: 15px;
+      left: 12px;
+
+    }
+
+    #text_popup_confirm-edit{
+      position: relative;
+      padding: 32px;
+      width: 100%;
+      max-width: 640px;
+      height: 100px;
+      background-color: white;
+    }
+
+    #confirm_edit_pop_button{
+      background-color: #333;
+      color: white;
+      position: absolute;
+      top: 580px;
+      left: 934px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    
+    #popup-error-edit{
+      visibility: hidden; 
+      background-color: rgba(0, 0, 0, 0.2);
+      width: 100%;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      position: fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+
+    #text_popup_error-edit{
+      position: relative;
+      padding: 32px;
+      width: 100%;
+      max-width: 640px;
+      height: 100px;
+      background-color: white;
+    }
+
+    #confirm_error_pop_button{
+      background-color: #333;
+      color: white;
+      position: absolute;
+      top: 580px;
+      left: 934px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+   
+    
     
     
   

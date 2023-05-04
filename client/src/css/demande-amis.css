@@ -1,0 +1,102 @@
+#friendRequest-body{
+
+    background-color: white;
+    width: auto;
+    min-height: 1090px;
+    height: auto;
+}
+
+#div_fr{
+
+    border: 2px solid #848484;
+    border-radius: 15px;
+    width: 400px;
+    position: relative;
+    left: 500px;
+    top: 50px;
+    height: 80px;
+    cursor: pointer;
+    margin-bottom: 10px;
+
+
+}
+#p_msg_fr{
+    position: relative;
+    left: -500px;
+}
+#p_fr{
+    position: relative;
+    left: -100px;
+    top: 7px;
+}
+
+.icon-accepted-fr{
+    width: 30px;
+    position: relative;
+    left: 120px;
+    top: -50px;
+    cursor: pointer;
+}
+
+.icon-denied-fr{
+    width: 30px;
+    position: relative;
+    left: 160px;
+    top: -50px;
+    cursor: pointer;
+}
+
+.icon-pp-fr{
+  width: 45px;
+  border-radius: 50px;
+  position: relative;
+  left: -20px;
+  top: -48px;
+}
+
+
+#popup_accept_friend{
+    visibility: hidden; 
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  #text_popup_accept_friend{
+    position: relative;
+    padding: 32px;
+    width: 100%;
+    max-width: 640px;
+    height: 100px;
+    background-color: white;
+  }
+  
+  #acceptfriend_pop_button{
+    background-color: #333;
+    color: white;
+    position: absolute;
+    top: 580px;
+    left: 934px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  
+  #acceptfriend_pop_button:hover{
+    background-color: #2e2e2e;
+  }
+
+
+  #no_friends_request{
+    position: relative;
+    top: 400px;
+    left: 150px;
+}
+  

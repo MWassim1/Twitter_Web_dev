@@ -18,14 +18,14 @@ function Profile_header(props){
     const navigate = useNavigate()
     
     useEffect(()=>{
-        console.log("URL MY PAGE : ",url.split('/'))
         if(url.split('/').length === 6){
           setIsMyPage(0)
       }
+      // eslint-disable-next-line
       },[])
 
     const handleClick = (evt) =>{
-        navigate('/Home/'+`${id}`)
+        navigate(`/Home/${id}`)
     }
 
     const handleClickLogout = (evt) =>{
@@ -41,7 +41,7 @@ function Profile_header(props){
 
       const handleClickEditProfile = (evt) => {
         evt.preventDefault()
-        navigate("/editprofile/"+`${id}`)
+        navigate(`/editprofile/${id}`)
       }
     return <header>
         <img className="header-logo" src={Logo}  alt="Logo" />

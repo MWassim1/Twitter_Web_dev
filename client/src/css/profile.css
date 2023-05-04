@@ -50,6 +50,7 @@ header {
   border-radius: 10px;
   position: relative;
   left: -220px;
+  border-radius: 10px;
 }
 
 .comment-profile {
@@ -221,7 +222,7 @@ header {
 #not_my_page_profile-info{
   position: relative;
   width: 500px;
-  left: 400px;
+  left: 350px;
 
 }
 
@@ -237,6 +238,7 @@ header {
   max-height: 150px;
   width: auto;
   height: auto;
+  border-radius: 10px;
 }
 
 .ul_list_options_profile{
@@ -263,7 +265,7 @@ header {
 .nb-comment_profile {
   position: relative;
   font-size: 15px;
-  left : -550px;
+  left : -470px;
   top : 114px
 }
 
@@ -502,7 +504,7 @@ header {
 
 .nb-comment3_profile{
   position: relative;
-  left: -543px;
+  left: -470px;
   top: 150px;
 }
 
@@ -523,10 +525,175 @@ header {
   border-radius: 4px;
   cursor: pointer;
   position: relative;
-  top: 250px;
+  top: 350px;
   left: -340px;
 }
 #button_for_edit_profile:hover{
   background-color: #2e2e2e;
+}
+
+
+#h3_friend_list{
+  color: black;
+}
+
+#addFriend-button{
+  border: none;
+  color: #ffffff;
+  visibility: visible;
+  background-color: #474747;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  top: 170px;
+  left: -640px;
+
+}
+#addFriend-button:hover{
+  background-color: #2e2e2e;
+}
+
+#addFriend-button2{
+  border: none;
+  color: #ffffff;
+  visibility: visible;
+  background-color: #474747;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  top: 165px;
+  left: -665px;
+
+}
+#addFriend-button2:hover{
+  background-color: #2e2e2e;
+}
+
+
+#delFriend-button{
+  border: none;
+  color: #ffffff;
+  visibility: visible;
+  background-color: #474747;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  top: 180px;
+  left: -678px;
+}
+
+#delFriend-button2{
+  border: none;
+  color: #ffffff;
+  visibility: visible;
+  background-color: #474747;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  top: -330px;
+  left: -670px;
+}
+
+#delFriend-button:hover{
+  background-color: #2e2e2e;
+}
+#delFriend-button2:hover{
+  background-color: #2e2e2e;
+}
+
+#popup_add_friend{
+  visibility: hidden; 
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+#text_popup_add_friend{
+  position: relative;
+  padding: 32px;
+  width: 100%;
+  max-width: 640px;
+  height: 100px;
+  background-color: white;
+  border-radius: 30px;
+}
+
+#addfriend_pop_button{
+  background-color: #333;
+  color: white;
+  position: absolute;
+  top: 580px;
+  left: 934px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+
+#addfriend_pop_button:hover{
+  background-color: #2e2e2e;
+}
+
+#infoFollowers{
+  background-color:   #474747;
+  position: relative;
+  top: -19px;
+}
+#nbFollowers{
+  color: white;
+  position: relative;
+  top: 24px;
+  left: 800px;
+  cursor: pointer;
+  width: 200px;
+}
+
+
+#nbFollowers2{
+  position: relative;
+  top:  -20px;
+  left: 1000px;
+  color: white;
+  cursor: pointer;
+  width: 200px;
+}
+
+#follow_button,
+#unfollow_button{
+  background-color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  top: -10px;
+  left: 50px;
+}
+
+#follow_button{
+  background-color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  top: -10px;
+  left: 50px;
+  width: 100px;
+}
+#follow_button:hover,
+#unfollow_button:hover{
+  background-color: #333;
+  color: white;
 }
 
