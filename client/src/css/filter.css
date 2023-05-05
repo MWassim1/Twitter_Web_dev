@@ -57,6 +57,16 @@
     top: -85px;
     border-radius: 40px;
   }
+  .icon-like-post {
+    height: 50px;
+    max-width: 100%;
+    margin-bottom: 1px;
+    position: relative;
+    left :-30px;
+    top : -20px
+  }
+  
+
 
   .search-bar-filter {
     width: 300px;
@@ -68,7 +78,9 @@
     position: relative;
     left: 100px;
   }
-
+  #li{
+    cursor: pointer;
+  }
   #listeusers-filter{
     color: white ;
     font-size: 19px;
@@ -133,22 +145,22 @@
     margin-right: 720px;
     margin-bottom: 1px;
     position: relative;
-    left :30px;
-    top : -13px
+    left :20px;
+    top : -20px
   }
 
   .nb-comment-filter {
     position: relative;
     font-size: 15px;
-    left : -420px;
-    top : 125px
+    left : -404px;
+    top : 83px
   }
   
   .nb-comment2-filter {
     position: relative;
     font-size: 15px;
-    left : -420px;
-    top : 135px
+    left : -404px;
+    top : 90px
   }
 
   .ul_options-filter{

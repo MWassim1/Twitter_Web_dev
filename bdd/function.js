@@ -7,6 +7,7 @@ const CommentModel = require('./models/comment.model')
 const FollowModel = require('./models/followers.model')
 const SessionModel =  require('./models/session.model')
 const RequestFriend = require('./models/requestfriend.model')
+const PostLiked = require('./models/like_post.model')
 
 // hash
 const bcrypt = require('bcrypt')
@@ -551,4 +552,35 @@ module.exports.waitResFR = async (req,res) =>{
 
     }
     return res.status(200).send({alreadyAsk :(user[0].friends_id).includes(req.params.id1) })
+}
+
+module.exports.getPostLiked = async (req,res) =>{
+    const post = await PostLiked.find({user_id:req.params.id})
+    return res.status(200).send(post)
+}
+
+module.exports.addPostLiked = async(req,res) =>{
+    const post = await PostLiked.find({user_id:req.params.id})
+    if(post.length ===0){
+        const new_post = await PostLiked.create({
+            user_id : req.params.id,
+            posts_liked : req.params.id_post
+        })
+        return res.status(200).send(new_post)
+    }
+    const update = await PostLiked.updateOne({user_id : req.params.id},{$set : {posts_liked : post[0].posts_liked.concat(req.params.id_post)}})
+    return res.status(200).send(update)
+}
+
+module.exports.delPostLiked = async(req,res) =>{
+    const post = await PostLiked.find({user_id:req.params.id})
+
+    delete post[0].posts_liked[Object.keys(post[0].posts_liked).find(key => post[0].posts_liked[key] === req.params.id_post)]
+
+    const post_updated = post[0].posts_liked.filter(x=> x!== undefined)
+
+    await PostLiked.updateOne({user_id:req.params.id},{$set : {posts_liked : post_updated}})
+
+    return res.status(200).send("OK")
+
 }

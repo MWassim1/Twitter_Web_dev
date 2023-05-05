@@ -7,8 +7,8 @@ import DeleteIcon from "../../image/delete.png"
 import FollowIcon from "../../image/follow.png"
 import ReportIcon from "../../image/report.png"
 import UnfollowIcon from "../../image/unfollow.png"
-import LikeButton from '../like/like';
 import DefaultPP from "../Profile/1.jpg"
+import LikeIcon from "../../image/like.svg"
 
 
 function Home_main(props){
@@ -23,6 +23,7 @@ function Home_main(props){
     const axiosUrlDelFollow = "http://localhost:7000/api/user/follow/"
     const axiosUrlGetUserInfo = "http://localhost:7000/api/userinfo/"
     const axiosUrlIsMyFriend = "http://localhost:7000/api/friend/"
+    const axiosUrlLikedPost = "http://localhost:7000/api/postliked/"
 
 
     const [comment,setComment] = useState('')
@@ -37,7 +38,7 @@ function Home_main(props){
     const [username,setUsername] = useState('')
     const [post,setPost] = useState('')
     const [textPopup,setTextPopup] = useState('')
-    const [filter,setFilter] = useState({friend : false , follow : false})
+    const [filter,setFilter] = useState({friend : false , follow : false,liked : false})
 
     let nb_com = 0
     let nb_post = 0
@@ -99,20 +100,32 @@ function Home_main(props){
     
 
     const create_post =  async (data) =>{
+
+      // Section qui gère les filtres
       let can_create_post = 0
-      if(filter.friend === false && filter.follow === false){
+      if(filter.friend === false && filter.follow === false && filter.liked === false){
         can_create_post = 1
       }
 
-      else if(filter.friend === true && filter.follow === false ){
+      else if(filter.friend === true && filter.follow === false && filter.liked === false ){
           await axios.get(axiosUrlIsMyFriend+id+"/"+data.user_id)
           .then(res=>{if(res.data.ismyfriend === true){can_create_post =1}})
       }
-      else if(filter.friend === false && filter.follow === true){
+      else if(filter.friend === false && filter.follow === true && filter.liked === false){
           await axios.get(axiosUrlGetInfoFollow+id)
                 .then(res=>{if((res.data.follow).includes(data.user_id)){can_create_post = 1}})
       }
-      else if(filter.friend === true && filter.follow === true){
+      else if (filter.friend === false && filter.follow === false && filter.liked === true){
+          await axios.get(axiosUrlLikedPost+id)
+              .then(res=>{ 
+                if(res.data.length !== 0 ){ 
+                  if((res.data[0].posts_liked).includes((data._id).toString())){
+                    can_create_post = 1
+                  }
+                }
+              })
+      }
+      else if(filter.friend === true && filter.follow === true && filter.liked === false){
         await axios.get(axiosUrlGetInfoFollow+id)
                 .then(async res=>{if((res.data.follow).includes(data.user_id)){
                   await axios.get(axiosUrlIsMyFriend+id+"/"+data.user_id)
@@ -120,6 +133,44 @@ function Home_main(props){
                 }})
 
       }
+      else if(filter.friend === true && filter.follow === false && filter.liked === true){
+        await axios.get(axiosUrlIsMyFriend+id+"/"+data.user_id)
+                  .then(async res=>{if(res.data.ismyfriend === true){ 
+                    await axios.get(axiosUrlLikedPost+id)
+                    .then(res=>{ 
+                      if(res.data.length !== 0 ){ 
+                        if((res.data[0].posts_liked).includes((data._id).toString())){
+                          can_create_post = 1
+                        }
+                      }
+                    })}})
+      }
+      else if(filter.friend === false && filter.follow === true && filter.liked === true){
+        await axios.get(axiosUrlGetInfoFollow+id)
+        .then(async res=>{if((res.data.follow).includes(data.user_id)){
+          await axios.get(axiosUrlLikedPost+id)
+                    .then(res=>{ 
+                      if(res.data.length !== 0 ){ 
+                        if((res.data[0].posts_liked).includes((data._id).toString())){
+                          can_create_post = 1
+                        }
+                      }
+                    })}})
+      }
+      else if(filter.friend === true && filter.follow === true && filter.liked === true){
+        await axios.get(axiosUrlGetInfoFollow+id)
+        .then(async res=>{if((res.data.follow).includes(data.user_id)){
+          await axios.get(axiosUrlLikedPost+id)
+                    .then(async res=>{ 
+                      if(res.data.length !== 0 ){ 
+                        if((res.data[0].posts_liked).includes((data._id).toString())){
+                          await axios.get(axiosUrlIsMyFriend+id+"/"+data.user_id)
+                            .then(async res=>{if(res.data.ismyfriend === true){can_create_post =1}})
+                        }
+                      }
+                    })}})
+      }
+
       if(can_create_post === 1){
         let comment_section =  document.getElementById("comment-section")
 
@@ -152,12 +203,6 @@ function Home_main(props){
 
         let new_br1_for_space = document.createElement("br")
         let new_br2_for_space = document.createElement("br")
-
-
-        // button : 
-
-        let new_button_ = document.createElement("button")
-
         
 
         // img :
@@ -168,6 +213,8 @@ function Home_main(props){
         let new_icon_report = document.createElement("img")
         let new_icon_unfollow = document.createElement("img")
         let new_icon_pp   = document.createElement("img")
+        let new_icon_like  = document.createElement("img")
+        new_icon_like.src = LikeIcon
         new_icon_comment.src = CommentIcon
         new_icon_delete.src = DeleteIcon
         new_icon_follow.src = FollowIcon
@@ -219,9 +266,8 @@ function Home_main(props){
 
         let new_date = document.createTextNode(`${hours}:${minutes} - ${day}/${month}/${year}`)
         let new_owner = document.createTextNode(`${data.username}`)
-        let new_button = document.createTextNode("Ajouter")
+
         new_div_for_comment.appendChild(new_icon_pp)
-        new_button_.appendChild(new_button)
         new_p_for_comment.appendChild(new_comment)
         new_div_for_main_dot.append(new_div_for_dot1)
         new_div_for_main_dot.append(new_div_for_dot2)
@@ -249,6 +295,7 @@ function Home_main(props){
         new_icon_follow.className="icon-follow"
         new_icon_report.className="icon-report"
         new_icon_pp.className="icon-pp-home"
+        new_icon_like.className="icon-like"
         
 
     
@@ -289,7 +336,6 @@ function Home_main(props){
       }
         new_div_for_comment.appendChild(new_div_for_ul_options)
         new_div_for_comment.appendChild(new_div_for_list_options)
-
         new_div_for_dot1.id = "option_"+nb_post
         new_div_for_dot2.id = "option_"+nb_post
         new_div_for_dot3.id = "option_"+nb_post
@@ -306,7 +352,8 @@ function Home_main(props){
         new_div_for_comment.className="comment"
         if(data.post.length > 800) {
           new_div_for_main_dot.className="ul_options2"
-        new_div_for_list_options.className="ul_list_options2"
+          new_div_for_list_options.className="ul_list_options2"
+
         }
         else {
         new_div_for_main_dot.className="ul_options"
@@ -317,12 +364,22 @@ function Home_main(props){
         new_p_for_unfollow.id="unfollowUser"
 
         
-        new_div_for_comment.appendChild(new_button_)
+        new_div_for_comment.appendChild(new_icon_like)
 
         new_div_for_comment.appendChild(new_icon_comment)
+        
+        await axios.get(axiosUrlLikedPost+id)
+                    .then(res=>{
+                      if(res.data.length !== 0 ){ 
+                        if((res.data[0].posts_liked).includes((data._id).toString())){
+                          new_icon_like.style.filter = "invert(14%) sepia(72%) saturate(7490) hue-rotate(359deg) brightness(97%) contrast(116%)"
+                        }
+                    }
+                    })
+       
 
         new_div_for_comment.addEventListener('click',(e)=>{
-        if(e.target.matches(".dot") || e.target.matches(".ul_options") || e.target.matches(".ul_options2")){
+        if(e.target.matches(".dot") || e.target.matches(".ul_options") || e.target.matches(".ul_options2")|| e.target.matches(".ul_options-ajust")){
               document.getElementById("list_"+e.target.id).style.visibility === "visible" ? document.getElementById("list_"+e.target.id).style.visibility = "hidden" : document.getElementById("list_"+e.target.id).style.visibility = "visible"
         }
         else if (e.target.matches("#goPageUser")){
@@ -347,7 +404,19 @@ function Home_main(props){
               setTextPopup(`Vous ne suivez plus ${data.username}`)
               document.getElementById("popup_add_follow").style.visibility = "visible"
           })
-        }      
+        }    
+        else if(e.target.matches(".icon-like")){
+              if(e.target.style.filter === "invert(14%) sepia(72%) saturate(7490) hue-rotate(359deg) brightness(97%) contrast(116%)")
+              {
+                axios.delete(axiosUrlLikedPost+id+"/"+(data._id).toString())
+                e.target.style.filter = "invert(0%) sepia(100%) saturate(0%) hue-rotate(248deg) brightness(96%) contrast(107%)"
+              }
+              else{
+                axios.put(axiosUrlLikedPost+id+"/"+(data._id).toString())
+                e.target.style.filter = "invert(14%) sepia(72%) saturate(7490) hue-rotate(359deg) brightness(97%) contrast(116%)"
+  
+              }
+        }  
         else {
           navigate(`/post/${id}/${data._id}`)
         }
@@ -418,6 +487,17 @@ function Home_main(props){
       setIndexPost(0)
       
     }
+    const filterLiked = (evt) =>{
+      delAllPost()
+      if(evt.target.checked === true){
+        setFilter((prevFilter)=>({...prevFilter,liked :true}))
+      }
+      else {
+        setFilter((prevFilter)=>({...prevFilter,liked :false}))
+      }
+      setIndexPost(0)
+      
+    }
     return (
     <div>
         <div className="center-section">
@@ -428,6 +508,8 @@ function Home_main(props){
               <input  onChange={filterFollow} type='checkbox' id='checkbox-follow' name='follow' value="Comptes suivis"/>
               <label id='label-checkbox' htmlFor='checkbox-friend'>Amis</label>
               <input onChange={filterFriend} type='checkbox' id='checkbox-friend' name='friend' value="Amis"/>
+              <label id='label-checkbox' htmlFor='checkbox-liked'>Publications aimées</label>
+              <input onChange={filterLiked} type='checkbox' id='checkbox-liked' name='liked' value="Publications aimées"/>
             </form>
           </div>
           <div className="new-comment-section">
@@ -447,7 +529,6 @@ function Home_main(props){
         <p id="text_popup_add_follow">{textPopup}</p>
         <button id="addfollow_pop_button" onClick={handleHideFollow}>OK</button>
     </div>
-    {/* <LikeButton></LikeButton> */}
     </div>
     )
 }

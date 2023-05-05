@@ -8,6 +8,8 @@ import FollowIcon from "../../image/follow.png"
 import ReportIcon from "../../image/report.png"
 import DeleteFriendIcon from "../../image/delete-friend.png"
 import UnfollowIcon from "../../image/unfollow.png"
+import LikeIcon from "../../image/like.svg"
+
 
 
 function Profile_area(props){
@@ -27,6 +29,8 @@ function Profile_area(props){
     const axiosUrlGetInfoFollow = "http://localhost:7000/api/user/followers/"
     const axiosUrlDelFollow = "http://localhost:7000/api/user/follow/"
     const axiosUrlWaitResFR = "http://localhost:7000/api/friendlist/"
+    const axiosUrlLikedPost = "http://localhost:7000/api/postliked/"
+
 
     const url = window.location.href
     const last_slash = url.lastIndexOf('/')
@@ -56,6 +60,8 @@ function Profile_area(props){
     const [isFollow,setIsFollow] = useState(0)
     const [askFriend,setAskFriend] = useState(0)
     const areainput = useRef(null)
+    const [filter,setFilter] = useState({liked: false})
+
 
     let nb_com = 0
     let nb_post = 0
@@ -107,6 +113,7 @@ function Profile_area(props){
         }catch(err){}
       }
     })
+    // eslint-disable-next-line
   },[askFriend])
   
   useEffect(()=>{
@@ -116,7 +123,7 @@ function Profile_area(props){
             setNbFollowers((res.data.follow).length)
           })
           .catch((err)=>{})
-
+// eslint-disable-next-line
   },[isFollow])
 
   useEffect(()=>{
@@ -244,7 +251,6 @@ function Profile_area(props){
         document.getElementById("list_options_"+e.target.className).style.visibility === "visible" ? document.getElementById("list_options_"+e.target.className).style.visibility = "hidden" : document.getElementById("list_options_"+e.target.className).style.visibility = "visible"
       }
       else if(e.target.matches("#p_delete_friend")){
-        console.log("delete friend")
         confirmDelete(friend_login,friend_id)
       }
       else if(e.target.matches("#p_go_friend")){
@@ -323,7 +329,7 @@ function Profile_area(props){
      })
   } 
   // eslint-disable-next-line
-  ,[post])
+  ,[post,filter])
 
   // Récupère les informations liées aux follows 
 
@@ -331,6 +337,7 @@ function Profile_area(props){
     axios.get(axiosUrlGetInfoFollow+url.split("/")[4])
             .then(res=>{
               if(res.data === "User not found"){
+                // eslint-disable-next-line
                 infoFollow = 0 
                 setIsFollow(0)
               }
@@ -401,225 +408,267 @@ function Profile_area(props){
   
 
   const create_post =  async (data) =>{
-
-    let comment_section =  document.getElementById("comment-profile")
-    
-    // Supprime la div quand on post notre premier post 
-    try{
-      if(comment_section.childNodes[1].innerText === "Aucun post disponible"){
-        comment_section.removeChild(comment_section.lastElementChild)
+    let can_create_post = 0
+    if(filter.liked === false){
+      can_create_post = 1
+    }
+    else if(filter.liked === true){
+      await axios.get(axiosUrlLikedPost+id)
+                    .then(res=>{
+                      if(res.data.length !== 0 ){ 
+                        if((res.data[0].posts_liked).includes((data._id).toString())){
+                          can_create_post = 1
+                        }
+                    }
+                    })
+    }
+    if(can_create_post ===1){
+      let comment_section =  document.getElementById("comment-profile")
+      
+      // Supprime la div quand on post notre premier post 
+      try{
+        if(comment_section.childNodes[1].innerText === "Aucun post disponible"){
+          comment_section.removeChild(comment_section.lastElementChild)
+        }
       }
-    }
-    catch{
-     
-    }
+      catch{
+      
+      }
 
 
-    if(url.split('/').length === 6){
-      comment_section = document.getElementById("comment-profile2")
-    }
+      if(url.split('/').length === 6){
+        comment_section = document.getElementById("comment-profile2")
+      }
 
-    // Récupère les commentaires pour le post data 
+      // Récupère les commentaires pour le post data 
 
-    await fetchNbComment(data._id)   
+      await fetchNbComment(data._id)   
+        
+
+      // Création des balises 
+
+      // p :
+
+      let new_p_for_comment= document.createElement('p')
+      let new_p_for_date = document.createElement('p')
+      let new_p_for_owner = document.createElement('p')
+      let new_p_for_nbcomment = document.createElement('p')
+      let new_p_for_report = document.createElement('p')
+      let new_p_for_follow = document.createElement('p')
+      let new_p_for_delete = document.createElement('p')
+      let new_p_for_unfollow = document.createElement('p')
+
+      // div  : 
+
+      let new_div_for_comment = document.createElement("div")
+      let new_div_for_ul_options = document.createElement("div")
+      let new_div_for_list_options = document.createElement("div")
+      let new_div_for_main_dot = document.createElement('div')
+      let new_div_for_dot1 = document.createElement('div')
+      let new_div_for_dot2= document.createElement('div')
+      let new_div_for_dot3 = document.createElement('div')
+
+      // br : 
+
+      let new_br1_for_space = document.createElement("br")
+      let new_br2_for_space = document.createElement("br")
+
+
       
 
-    // Création des balises 
+      // img :
 
-    // p :
+      let new_icon_comment = document.createElement("img")
+      let new_icon_delete = document.createElement("img")
+      let new_icon_follow = document.createElement("img")
+      let new_icon_report = document.createElement("img")
+      let new_icon_unfollow = document.createElement("img")
+      let new_icon_like  = document.createElement("img")
+      new_icon_like.src = LikeIcon
+      new_icon_comment.src = CommentIcon
+      new_icon_delete.src = DeleteIcon
+      new_icon_follow.src = FollowIcon
+      new_icon_report.src = ReportIcon
+      new_icon_unfollow.src= UnfollowIcon
 
-    let new_p_for_comment= document.createElement('p')
-    let new_p_for_date = document.createElement('p')
-    let new_p_for_owner = document.createElement('p')
-    let new_p_for_nbcomment = document.createElement('p')
-    let new_p_for_report = document.createElement('p')
-    let new_p_for_follow = document.createElement('p')
-    let new_p_for_delete = document.createElement('p')
-    let new_p_for_unfollow = document.createElement('p')
+      // Création des texteNode : 
+      let new_comment = document.createTextNode(data.post)
+      let new_nbcomment = document.createTextNode(nb_com)
+      let new_report = document.createTextNode("Signaler le post")
+      let new_follow = document.createTextNode(`Suivre ${data.username}`)
+      let new_unfollow = document.createTextNode(`Ne plus suivre ${data.username}`)
+      let new_delete = document.createTextNode("Supprimer le post")
 
-    // div  : 
+      const date = new Date(data.createdAt)
+      var year = date.getFullYear();
+      var month = date.getMonth()+1;
+      var day = date.getDate();
 
-    let new_div_for_comment = document.createElement("div")
-    let new_div_for_ul_options = document.createElement("div")
-    let new_div_for_list_options = document.createElement("div")
-    let new_div_for_main_dot = document.createElement('div')
-    let new_div_for_dot1 = document.createElement('div')
-    let new_div_for_dot2= document.createElement('div')
-    let new_div_for_dot3 = document.createElement('div')
+      if (day < 10) {
+        day = '0' + day;
+      }
+      if (month < 10) {
+        month = '0' + month;
+      }
 
-    // br : 
+      
+      var minutes = '0'
+      var hours = '0'
+      if(date.getMinutes() < 10){
+        minutes += date.getMinutes()
+      }
+      else {minutes = date.getMinutes()}
+      if(date.getHours() === '0'){hours+='0'}
+      else{hours=date.getHours()}
 
-    let new_br1_for_space = document.createElement("br")
-    let new_br2_for_space = document.createElement("br")
+      let new_date = document.createTextNode(`${hours}:${minutes} - ${day}/${month}/${year}`)
+      let new_owner = document.createTextNode(`${data.username}`)
+
+      new_p_for_comment.appendChild(new_comment)
+      new_p_for_date.appendChild(new_date)
+      new_p_for_owner.appendChild(new_owner)
+      new_p_for_nbcomment.appendChild(new_nbcomment)
+      new_p_for_delete.appendChild(new_delete)
+      new_p_for_report.appendChild(new_report)
+      new_p_for_follow.appendChild(new_follow)
+      new_p_for_unfollow.appendChild(new_unfollow)
+      
+
+      new_p_for_comment.className = "comment-content"
+      new_p_for_date.className = "comment-date"
+      new_p_for_owner.className = "comment-owner"
+      new_icon_comment.className="icon-comment_profile"
+      new_icon_unfollow.className="icon-unfollow"
+      new_div_for_dot1.className="dot_profile" 
+      new_div_for_dot2.className="dot_profile" 
+      new_div_for_dot3.className="dot_profile" 
+      new_icon_delete.className="icon-delete"
+      new_icon_follow.className="icon-follow"
+      new_icon_report.className="icon-report"
+      new_icon_like.className="icon-like-profile"
+      
+
+  
+
+      new_div_for_main_dot.append(new_div_for_dot1)
+      new_div_for_main_dot.append(new_div_for_dot2)
+      new_div_for_main_dot.append(new_div_for_dot3)
+
+      new_div_for_ul_options.appendChild(new_div_for_main_dot)
+
+      new_div_for_comment.appendChild(new_p_for_comment)
+      new_div_for_comment.appendChild(new_p_for_date)
+      new_div_for_comment.appendChild(new_p_for_owner)
+      new_div_for_comment.appendChild(new_br1_for_space)
+      new_div_for_comment.appendChild(new_br2_for_space)
+      new_div_for_comment.appendChild(new_p_for_nbcomment)
 
 
-    // button : 
-
-    let new_button_ = document.createElement("button")
-
-    
-
-    // img :
-
-    let new_icon_comment = document.createElement("img")
-    let new_icon_delete = document.createElement("img")
-    let new_icon_follow = document.createElement("img")
-    let new_icon_report = document.createElement("img")
-    let new_icon_unfollow = document.createElement("img")
-    new_icon_comment.src = CommentIcon
-    new_icon_delete.src = DeleteIcon
-    new_icon_follow.src = FollowIcon
-    new_icon_report.src = ReportIcon
-    new_icon_unfollow.src= UnfollowIcon
-
-    // Création des texteNode : 
-    let new_comment = document.createTextNode(data.post)
-    let new_nbcomment = document.createTextNode(nb_com)
-    let new_report = document.createTextNode("Signaler le post")
-    let new_follow = document.createTextNode(`Suivre ${data.username}`)
-    let new_unfollow = document.createTextNode(`Ne plus suivre ${data.username}`)
-    let new_delete = document.createTextNode("Supprimer le post")
-
-    const date = new Date(data.createdAt)
-    console.log()
-    var year = date.getFullYear();
-    var month = date.getMonth()+1;
-    var day = date.getDate();
-
-    if (day < 10) {
-      day = '0' + day;
+    if( data.user_id === id && url.split('/').length === 5){
+      new_div_for_list_options.appendChild(new_p_for_delete)
+      new_p_for_delete.appendChild(new_icon_delete)
+      new_p_for_nbcomment.className ="nb-comment_profile"
     }
-    if (month < 10) {
-      month = '0' + month;
+    else if(url.split('/').length === 6){
+      if(infoFollow === 0){
+        new_div_for_list_options.appendChild(new_p_for_follow) 
+        new_p_for_follow.appendChild(new_icon_follow)
+      }
+      else{
+        new_div_for_list_options.appendChild(new_p_for_unfollow) 
+        new_p_for_unfollow.appendChild(new_icon_unfollow)
+      }
+      new_div_for_list_options.appendChild(new_p_for_report)
+      new_p_for_report.appendChild(new_icon_report)
+      new_p_for_nbcomment.className ="nb-comment3_profile"
     }
-
     
-    var minutes = '0'
-    var hours = '0'
-    if(date.getMinutes() < 10){
-      minutes += date.getMinutes()
-    }
-    else {minutes = date.getMinutes()}
-    if(date.getHours() === '0'){hours+='0'}
-    else{hours=date.getHours()}
-
-    let new_date = document.createTextNode(`${hours}:${minutes} - ${day}/${month}/${year}`)
-    let new_owner = document.createTextNode(`${data.username}`)
-    let new_button = document.createTextNode("Ajouter")
-
-    new_button_.appendChild(new_button)
-    new_p_for_comment.appendChild(new_comment)
-    new_p_for_date.appendChild(new_date)
-    new_p_for_owner.appendChild(new_owner)
-    new_p_for_nbcomment.appendChild(new_nbcomment)
-    new_p_for_delete.appendChild(new_delete)
-    new_p_for_report.appendChild(new_report)
-    new_p_for_follow.appendChild(new_follow)
-    new_p_for_unfollow.appendChild(new_unfollow)
-    
-
-    new_p_for_comment.className = "comment-content"
-    new_p_for_date.className = "comment-date"
-    new_p_for_owner.className = "comment-owner"
-    new_icon_comment.className="icon-comment_profile"
-    new_icon_unfollow.className="icon-unfollow"
-    new_div_for_dot1.className="dot_profile" 
-    new_div_for_dot2.className="dot_profile" 
-    new_div_for_dot3.className="dot_profile" 
-    new_icon_delete.className="icon-delete"
-    new_icon_follow.className="icon-follow"
-    new_icon_report.className="icon-report"
-    
-
- 
-
-    new_div_for_main_dot.append(new_div_for_dot1)
-    new_div_for_main_dot.append(new_div_for_dot2)
-    new_div_for_main_dot.append(new_div_for_dot3)
-
-    new_div_for_ul_options.appendChild(new_div_for_main_dot)
-
-    new_div_for_comment.appendChild(new_p_for_comment)
-    new_div_for_comment.appendChild(new_p_for_date)
-    new_div_for_comment.appendChild(new_p_for_owner)
-    new_div_for_comment.appendChild(new_br1_for_space)
-    new_div_for_comment.appendChild(new_br2_for_space)
-    new_div_for_comment.appendChild(new_p_for_nbcomment)
-
-
-   if( data.user_id === id && url.split('/').length === 5){
-    new_div_for_list_options.appendChild(new_p_for_delete)
-    new_p_for_delete.appendChild(new_icon_delete)
-    new_p_for_nbcomment.className ="nb-comment_profile"
-   }
-   else if(url.split('/').length === 6){
-    if(infoFollow === 0){
+    else{
       new_div_for_list_options.appendChild(new_p_for_follow) 
       new_p_for_follow.appendChild(new_icon_follow)
+      new_div_for_list_options.appendChild(new_p_for_report)
+      new_p_for_report.appendChild(new_icon_report)
+      new_p_for_nbcomment.className ="nb-comment2_profile"
     }
-    else{
-      new_div_for_list_options.appendChild(new_p_for_unfollow) 
-      new_p_for_unfollow.appendChild(new_icon_unfollow)
-    }
-    new_div_for_list_options.appendChild(new_p_for_report)
-    new_p_for_report.appendChild(new_icon_report)
-    new_p_for_nbcomment.className ="nb-comment3_profile"
-   }
-   
-   else{
-    new_div_for_list_options.appendChild(new_p_for_follow) 
-    new_p_for_follow.appendChild(new_icon_follow)
-    new_div_for_list_options.appendChild(new_p_for_report)
-    new_p_for_report.appendChild(new_icon_report)
-    new_p_for_nbcomment.className ="nb-comment2_profile"
-   }
 
-    new_div_for_comment.appendChild(new_div_for_ul_options)
-    new_div_for_comment.appendChild(new_div_for_list_options)
+      new_div_for_comment.appendChild(new_div_for_ul_options)
+      new_div_for_comment.appendChild(new_div_for_list_options)
 
-    new_div_for_dot1.id = "option_"+nb_post
-    new_div_for_dot2.id = "option_"+nb_post
-    new_div_for_dot3.id = "option_"+nb_post
-    new_div_for_main_dot.id = "option_"+nb_post
-    new_div_for_list_options.id="list_option_"+nb_post
+      new_div_for_dot1.id = "option_"+nb_post
+      new_div_for_dot2.id = "option_"+nb_post
+      new_div_for_dot3.id = "option_"+nb_post
+      new_div_for_main_dot.id = "option_"+nb_post
+      new_div_for_list_options.id="list_option_"+nb_post
 
 
-    new_p_for_delete.className="p_li"
-    new_p_for_follow.className="p_li"
-    new_p_for_report.className="p_li"
-    new_p_for_unfollow.className="p_li"
+      new_p_for_delete.className="p_li"
+      new_p_for_follow.className="p_li"
+      new_p_for_report.className="p_li"
+      new_p_for_unfollow.className="p_li"
 
-    new_div_for_comment.className="comment_profile"
-    if(url.split('/').length === 6){
-      new_div_for_comment.className="comment_profile2"
-    }
-    new_div_for_main_dot.className="ul_options_profile"
-    new_div_for_list_options.className="ul_list_options_profile"
-
+      new_div_for_comment.className="comment_profile"
+      if(url.split('/').length === 6){
+        new_div_for_comment.className="comment_profile2"
+      }
+      new_div_for_main_dot.className="ul_options_profile"
+      new_div_for_list_options.className="ul_list_options_profile"
+      if(data.post.length > 800) {
+        new_div_for_main_dot.className="ul_options_profile2"
+        new_div_for_list_options.className="ul_list_options_profile2"
+      }
     
-    new_p_for_follow.id="followUser"
-    new_p_for_unfollow.id="unfollowUser"
 
-    new_div_for_comment.appendChild(new_button_)
+      
+      new_p_for_follow.id="followUser"
+      new_p_for_unfollow.id="unfollowUser"
 
-    new_div_for_comment.appendChild(new_icon_comment)
-    new_div_for_comment.addEventListener('click',(e)=>{
-     if(e.target.matches(".dot_profile") || e.target.matches(".ul_options_profile")){
-          document.getElementById("list_"+e.target.id).style.visibility === "visible" ? document.getElementById("list_"+e.target.id).style.visibility = "hidden" : document.getElementById("list_"+e.target.id).style.visibility = "visible"
-     }
-     else if (e.target.matches("#followUser")|| e.target.matches(".icon-follow")){
-      followUser()
-     }
-     else if(e.target.matches("#unfollowUser") || e.target.matches(".icon-unfollow")){
-      unfollowUser()
-    }      
-     else {
-      navigate(`/post/${id}/${data._id}`)
-     }
+      new_div_for_comment.appendChild(new_icon_like)
 
-    })
-    comment_section.insertBefore(new_div_for_comment ,comment_section.firstChild.nextSibling)
-    nb_post+=1
+      new_div_for_comment.appendChild(new_icon_comment)
+      let id_tmp = id
+      if(url.split("/").length === 6 ){
+        id_tmp = url.split("/")[4]
+      }
+      await axios.get(axiosUrlLikedPost+id_tmp)
+                      .then(res=>{
+                        if(res.data.length !== 0 ){ 
+                          if((res.data[0].posts_liked).includes((data._id).toString())){
+                            new_icon_like.style.filter = "invert(14%) sepia(72%) saturate(7490) hue-rotate(359deg) brightness(97%) contrast(116%)"
+                          }
+                      }
+                      })
+
+      new_div_for_comment.addEventListener('click',(e)=>{
+      if(e.target.matches(".dot_profile") || e.target.matches(".ul_options_profile")|| e.target.matches(".ul_options_profile2")){
+            document.getElementById("list_"+e.target.id).style.visibility === "visible" ? document.getElementById("list_"+e.target.id).style.visibility = "hidden" : document.getElementById("list_"+e.target.id).style.visibility = "visible"
+      }
+      else if (e.target.matches("#followUser")|| e.target.matches(".icon-follow")){
+        followUser()
+      }
+      else if(e.target.matches("#unfollowUser") || e.target.matches(".icon-unfollow")){
+        unfollowUser()
+      }    
+      else if(e.target.matches(".icon-like-profile")){
+        if(e.target.style.filter === "invert(14%) sepia(72%) saturate(7490) hue-rotate(359deg) brightness(97%) contrast(116%)")
+        { 
+          axios.delete(axiosUrlLikedPost+id_tmp+"/"+(data._id).toString())
+          e.target.style.filter = "invert(0%) sepia(100%) saturate(0%) hue-rotate(248deg) brightness(96%) contrast(107%)"
+          
+        }
+        else{
+          axios.put(axiosUrlLikedPost+id_tmp+"/"+(data._id).toString())
+          e.target.style.filter = "invert(14%) sepia(72%) saturate(7490) hue-rotate(359deg) brightness(97%) contrast(116%)"
+
+        }
+      }    
+      else {
+        navigate(`/post/${id}/${data._id}`)
+      }
+
+      })
+      comment_section.insertBefore(new_div_for_comment ,comment_section.firstChild.nextSibling)
+      nb_post+=1
+    }
 
   }
 
@@ -705,13 +754,36 @@ function Profile_area(props){
 
 
   }
+  const delAllPost = () =>{
+    const comment_section = document.getElementById("comment-profile")
+    while(comment_section.childNodes.length>1){
+      comment_section.removeChild(comment_section.lastElementChild)
+    }
+  }
+  const filterLiked = (evt) =>{
+      delAllPost()
+      if(evt.target.checked === true){
+        setFilter((prevFilter)=>({...prevFilter,liked :true}))
+      }
+      else {
+        setFilter((prevFilter)=>({...prevFilter,liked :false}))
+      }
+      setIndexPost(0)
+
+  } 
     return <div className='profile-body' id='profile-body'>
         <div id="infoFollowers"><p id="nbFollowers" onClick={handleClickShowFollows}>{nbFollowers} Abonnements</p> <p id="nbFollowers2" onClick={handleClickShowFollowers}>{nbFollowedBy} abonnés</p>
           {ismypage === 0 ? isFollow === 1 ? <button id="unfollow_button" onClick={unfollowUser}>Ne plus suivre</button> : <button id="follow_button" onClick={followUser}>Suivre</button>: <p/>}
         </div>
         <div className="profile-section">
         { ismypage === 1 ? profilePicture !== ''? <img className="profile-picture" src={profilePicture}  alt=""  /> : <img className="profile-picture" src={DefaultPP} alt=""   />:profilePicture !== ''? <img className="not_my_profile-picture" src={profilePicture} alt=""  /> : <img className="not_my_profile-picture" src={DefaultPP}  alt="" /> }
-        
+        {ismypage ===1 ? <div id='div_filter_profile'>
+            <p id='p_filter_profile' >Filtre :</p>
+            <form id="checkbox-postliked">
+              <label id='label-checkbox' htmlFor='checkbox-postliked'>Publications aimées</label>
+              <input  onChange={filterLiked} type='checkbox' id='checkbox-follow' name='postliked' value="Publications aimées"/>
+             </form>
+          </div> : <p/>}
         { ismypage === 1 ? <div className="profile-info"><h2>{lastname} {firstname} ({username})<br/>{country} {city}</h2>{ age !== null?<p>  Age : {age} ans</p> :<p id="p_no_age" onClick={handleClickEditProfile} >Ajoutez votre âge</p> }{ bio !== ''?<p>Biographie : {bio}</p> : <p id="p_no_bio" onClick={handleClickEditProfile}>Ajoutez une bio </p>}
         </div> : <div className="profile-info" id="not_my_page_profile-info"><h2>{lastname} {firstname}  ({username})<br/>{country} {city}</h2>{ age !==null? <p>  Age : {age} ans</p> :<p/> }{ bio !== ''?<p>Biographie : {bio}</p> : <p />}</div>}
         { ismypage === 0 ?<button id="addFriend-button" onClick={handleClickAddorDelete}>Ajouter en ami</button>:<p/>}

@@ -26,8 +26,9 @@
     margin-left: 450px;
     max-width: 1200px;
     margin-top: 50px;
-    margin-left: 300px;    
-
+    margin-left: 300px;
+    min-width: 999px;
+    width:auto;
   }
 
 .center-section-post {
@@ -43,10 +44,16 @@
 .nb-comment-post {
     position: relative;
     font-size: 15px;
-    left : -560px;
-    top : 71px;
+    left : -574px;
+    top : 48px;
   }
 
+  .nb-comment-post2 {
+    position: relative;
+    font-size: 15px;
+    left : -464px;
+    top : 48px;
+  }
 .comment-post button {
   border: none;
   color: #ffffff;
@@ -68,8 +75,8 @@
     margin-right: 720px;
     margin-bottom: 1px;
     position: relative;
-    left :-110px;
-    top : -10px
+    left :-150px;
+    top : 1px
   }
 
   #areainput2 {
@@ -77,6 +84,8 @@
     min-width: 1050px;
     height: 70px;
     margin-left: 300px;
+    position: relative;
+    left: -5px;
   }
 
   #comment-list-section{
@@ -107,5 +116,46 @@
     width: 65px;
     border-radius: 50px;
     position: relative;
-    left: -570px;
+    left: -550px;
   }
+  .icon-like-post1{
+    width: 50px;
+    position: relative;
+    left: -180px;
+  }
+
+
+  .icon-pp-post2{
+    width: 65px;
+    border-radius: 50px;
+    position: relative;
+    left: -450px;
+    cursor: pointer;
+  }
+  .icon-like-post2{
+    width: 50px;
+    position: relative;
+    left: -80px;
+    cursor: pointer;
+  }
+
+  .icon-comment-post2 {
+    height: 50px;
+    max-width: 100%;
+    margin-right: 720px;
+    margin-bottom: 1px;
+    position: relative;
+    left :-40px;
+    top : 1px
+  }
+
+  #areainput3 {
+    margin-top: 10px;
+    min-width: 1050px;
+    height: 70px;
+    margin-left: 300px;
+    position: relative;
+    left: -85px;
+  }
+
+  

@@ -186,19 +186,6 @@ header {
   margin-right: 20px;
 }
 
-.comment button {
-  border: none;
-  color: #ffffff;
-  background-color: #474747;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 2px;
-  margin-right: 1745px;
-  margin-bottom: 1px;
-  position: relative;
-  top : 30px
-}
 
 .comment button:hover {
   background-color: #2e2e2e;
@@ -239,6 +226,7 @@ html, body {
   margin-right: 70px;
   cursor: pointer;
   height: auto;
+  min-width: 1350px;
 }
 
 
@@ -272,8 +260,8 @@ html, body {
   margin-right: 720px;
   margin-bottom: 1px;
   position: relative;
-  left :-220px;
-  top : -15px
+  left :-250px;
+  top : -13px
 }
 .icon-delete {
   position: relative;
@@ -295,6 +283,14 @@ html, body {
   top : 2px;
 }
 
+.icon-like {
+  height: 50px;
+  max-width: 100%;
+  position: relative;
+  left :-275px;
+  top : -15px;
+ }
+
 .icon-pp-home{
   width: 65px;
   position: relative;
@@ -305,23 +301,93 @@ html, body {
 .nb-comment {
   position: relative;
   font-size: 15px;
-  left : -670px;
-  top : 147px
+  left : -673px;
+  top : 115px
 }
 
 .nb-comment2 {
   position: relative;
   font-size: 15px;
-  left : -670px;
-  top : 155px
+  left : -674px;
+  top : 123px
 }
 
 .nb-comment3 {
   position: relative;
   font-size: 15px;
-  left : -670px;
-  top : 172px;
+  left : -674px;
+  top : 140px;
 }
+
+
+
+/* ICON AJUST  */
+
+.icon-comment-ajust {
+  height: 50px;
+  max-width: 100%;
+  margin-right: 720px;
+  margin-bottom: 1px;
+  position: relative;
+  left :50px;
+  top : -13px
+}
+
+.nb-comment-ajust {
+  position: relative;
+  font-size: 15px;
+  left : -374px;
+  top : 123px;
+}
+
+.nb-comment-ajust2 {
+  position: relative;
+  font-size: 15px;
+  left : -374px;
+  top : 139px;
+}
+
+.icon-pp-home-ajust{
+  width: 65px;
+  position: relative;
+  border-radius: 50px;
+  top: 1px;
+  left: -390px;
+}
+
+.icon-like-ajust{
+  height: 50px;
+  max-width: 100%;
+  position: relative;
+  left :0px;
+  top : -15px;
+ }
+
+ .ul_options-ajust{
+  font-size: 12px;
+  position: relative;
+  left: 835px;
+  top: -200px;
+  width: 20px;
+  padding-left: 13px;
+}
+
+.ul_list_options-ajust{
+  position: relative;
+  display: block;
+  top: -245px;
+  left: 620px;
+  width: 195px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  visibility: hidden;
+  cursor: pointer;
+  background-color:  #f1f1f1;
+}
+
+
+
+
+
 
 .ul_options{
   font-size: 12px;
@@ -447,12 +513,16 @@ html, body {
   accent-color: #2e2e2e;
 }
 
+#checkbox-liked:checked{
+  accent-color: #2e2e2e;
+}
+
 #div_filter_home{
   border: 2px solid #848484;
   position: relative;
   width: 190px;
   left: -130px;
-  height: 200px;
+  height: 240px;
 }
 #p_filter_home{
   position: relative;

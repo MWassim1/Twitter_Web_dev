@@ -1,4 +1,4 @@
-const { formSignIn, formSignUp,logout,user_id,new_post,getUser,filterPost,resFriendRequest,waitResFR,getFriendRequest,get_post,setlogin,delFollow,addToFriendList,getSession,get_login,isMyFriend,getlogged,get_user, islogged,setUser,saveSession,get_post_id,get_post_idpost,setPost,delPost,addFriend,getFriend,delFriend,addComment,getComments,setComment,delComment,addFollow,getFollowers,getUserByName} = require('../../bdd/function');
+const { formSignIn,getPostLiked,addPostLiked, delPostLiked,formSignUp,logout,user_id,new_post,getUser,filterPost,resFriendRequest,waitResFR,getFriendRequest,get_post,setlogin,delFollow,addToFriendList,getSession,get_login,isMyFriend,getlogged,get_user, islogged,setUser,saveSession,get_post_id,get_post_idpost,setPost,delPost,addFriend,getFriend,delFriend,addComment,getComments,setComment,delComment,addFollow,getFollowers,getUserByName} = require('../../bdd/function');
 
   
 module.exports=function(app){
@@ -102,6 +102,17 @@ app.post(`/api/users`,formSignUp)
 
 //GET /api/posts/:filter (Filtre les posts)
 .get("/api/posts/:filter",filterPost)
+
+//GET /api/postliked/:id (Récupère les posts aimés par id)
+.get("/api/postliked/:id",getPostLiked)
+
+//PUT /api/postliked/:id/:id_post (id a aimé le post id_post)
+.put("/api/postliked/:id/:id_post",addPostLiked)
+
+//DELETE /api/postliked/:id/:id_post (id n'aime plus le post id_post)
+
+.delete("/api/postliked/:id/:id_post",delPostLiked)
+
 
 
 

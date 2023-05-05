@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios"
 import CommentIcon from "../../image/commenter.png"
 import DefaultPP from "../Profile/1.jpg"
+import LikeIcon from "../../image/like.svg"
+
 
 
 
@@ -24,6 +26,7 @@ function Post (props){
     const axiosUrlGetCommentwPost = "http://localhost:7000/api/post/comment/"
     const axiosUrlPostComment = "http://localhost:7000/api/post/comment/"
     const axiosUrlGetUserInfo = "http://localhost:7000/api/userinfo/"
+    const axiosUrlLikedPost = "http://localhost:7000/api/postliked/"
     
     let nb_com = 0 
     let user_w_id = ""
@@ -78,7 +81,6 @@ function Post (props){
     
     const create_comment = async (data) =>{
         let comment_list = document.getElementById("comment-list-section")
-        console.log(comment_list)
 
         // Récupère le user  pour le  commentaire data 
 
@@ -102,9 +104,6 @@ function Post (props){
         let new_br2_for_space = document.createElement("br")
   
   
-        // button : 
-  
-        let new_button_ = document.createElement("button")
   
         // img :
   
@@ -150,9 +149,7 @@ function Post (props){
         let new_date = document.createTextNode(`${hours}:${minutes} - ${day}/${month}/${year}`)
 
         let new_owner = document.createTextNode(user_w_id)
-        let new_button = document.createTextNode("Ajouter")
   
-        new_button_.appendChild(new_button)
         new_p_for_comment.appendChild(new_comment)
         new_p_for_date.appendChild(new_date)
         new_p_for_owner.appendChild(new_owner)
@@ -215,14 +212,12 @@ function Post (props){
         let new_br2_for_space = document.createElement("br")
   
   
-        // button : 
-  
-        let new_button_ = document.createElement("button")
-  
         // img :
   
         let new_icon_comment = document.createElement("img")
         let new_icon_pp   = document.createElement("img")
+        let new_icon_like  = document.createElement("img")
+        new_icon_like.src = LikeIcon
         new_icon_pp.src = DefaultPP
         new_icon_comment.src = CommentIcon
 
@@ -263,9 +258,7 @@ function Post (props){
   
         let new_date = document.createTextNode(`${hours}:${minutes} - ${day}/${month}/${year}`)
         let new_owner = document.createTextNode(`${data.username}`)
-        let new_button = document.createTextNode("Ajouter")
-  
-        new_button_.appendChild(new_button)
+       
         new_p_for_comment.appendChild(new_comment)
         new_p_for_date.appendChild(new_date)
         new_p_for_owner.appendChild(new_owner)
@@ -277,6 +270,7 @@ function Post (props){
         new_p_for_nbcomment.className ="nb-comment-post"
         new_icon_comment.className="icon-comment-post"
         new_icon_pp.className="icon-pp-post"
+        new_icon_like.className="icon-like-post1"
         
         new_div_for_comment.appendChild(new_icon_pp)
         new_div_for_comment.appendChild(new_p_for_comment)
@@ -287,10 +281,38 @@ function Post (props){
         new_div_for_comment.appendChild(new_p_for_nbcomment)
         new_div_for_comment.className="comment-post"
         
-        new_div_for_comment.appendChild(new_button_)
+        new_div_for_comment.appendChild(new_icon_like)
   
         new_div_for_comment.appendChild(new_icon_comment)
-        console.log(new_div_for_comment,comment_section)
+        if(data.post.length < 800) {
+          new_icon_like.className="icon-like-post2"
+          new_p_for_nbcomment.className ="nb-comment-post2"
+          new_icon_comment.className="icon-comment-post2"
+          new_icon_pp.className="icon-pp-post2"
+          document.getElementById("areainput2").id = "areainput3"
+        }
+        await axios.get(axiosUrlLikedPost+url.split("/")[4])
+                    .then(res=>{
+                      if(res.data.length !== 0 ){ 
+                        if((res.data[0].posts_liked).includes(id)){
+                          new_icon_like.style.filter = "invert(14%) sepia(72%) saturate(7490) hue-rotate(359deg) brightness(97%) contrast(116%)"
+                        }
+                    }
+                    })
+        new_div_for_comment.addEventListener("click",(e)=>{
+          if(e.target.matches(".icon-like-post1") || e.target.matches(".icon-like-post2")){
+            if(e.target.style.filter === "invert(14%) sepia(72%) saturate(7490) hue-rotate(359deg) brightness(97%) contrast(116%)")
+              {
+                axios.delete(axiosUrlLikedPost+url.split("/")[4]+"/"+id)
+                e.target.style.filter = "invert(0%) sepia(100%) saturate(0%) hue-rotate(248deg) brightness(96%) contrast(107%)"
+              }
+              else{
+                axios.put(axiosUrlLikedPost+url.split("/")[4]+"/"+id)
+                e.target.style.filter = "invert(14%) sepia(72%) saturate(7490) hue-rotate(359deg) brightness(97%) contrast(116%)"
+  
+              }
+          }
+        })
         comment_section.appendChild(new_div_for_comment)
   
       }
@@ -320,7 +342,6 @@ function Post (props){
               
             })
             .catch((err)=>{console.log(err)})
-        console.log(comment)
           }
       }
 

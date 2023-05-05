@@ -49,7 +49,7 @@ header {
   margin-top: 20px;
   border-radius: 10px;
   position: relative;
-  left: -220px;
+  left: -160px;
   border-radius: 10px;
 }
 
@@ -261,12 +261,32 @@ header {
   width: 40px;
   margin: auto;
 }
+.ul_list_options_profile2{
+  position: relative;
+  display: block;
+  top: -305px;
+  left: 765px;
+  width: 195px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  visibility: hidden;
+  cursor: pointer;
+  background-color:  #f1f1f1;
+}
+
+.ul_options_profile2{
+  font-size: 12px;
+  position: relative;
+  left: 485px;
+  top: -270px;
+  width: 40px;
+  margin: auto;
+}
 
 .nb-comment_profile {
   position: relative;
   font-size: 15px;
   left : -470px;
-  top : 114px
+  top : 134px
 }
 
 .nb-comment2_profile {
@@ -284,6 +304,16 @@ header {
   position: relative;
   left :-20px;
   top : -13px
+}
+
+.icon-like-profile {
+  height: 50px;
+  max-width: 100%;
+  margin-right: 720px;
+  margin-bottom: 1px;
+  position: relative;
+  left :-100px;
+  top : 40px
 }
 
 .dot_profile{
@@ -505,7 +535,7 @@ header {
 .nb-comment3_profile{
   position: relative;
   left: -470px;
-  top: 150px;
+  top: 165px;
 }
 
 #div_textarea_notmypage{
@@ -697,3 +727,16 @@ header {
   color: white;
 }
 
+#checkbox-postliked{
+  position: relative;
+  left: -300px;
+  width: 107px;
+  top: 200px;
+  border: 2px solid #848484;
+}
+
+#p_filter_profile{
+  position: relative;
+  left: -300px;
+  top: 220px;
+}

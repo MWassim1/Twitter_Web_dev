@@ -11,6 +11,8 @@ import ReportIcon from "../../image/report.png"
 import UnfollowIcon from "../../image/unfollow.png"
 import Navbar from "../Home/navbar"
 import DefaultPP from "../Profile/1.jpg"
+import LikeIcon from "../../image/like.svg"
+
 
 
 function FilterPost(props) {
@@ -26,6 +28,7 @@ function FilterPost(props) {
   const axiosUrlFollow = "http://localhost:7000/api/user/follow/"
   const axiosUrlDelFollow = "http://localhost:7000/api/user/follow/"
   const axiosUrlGetUserInfo = "http://localhost:7000/api/userinfo/"
+  const axiosUrlLikedPost = "http://localhost:7000/api/postliked/"
 
   const url = window.location.href
   const id = url.split('/')[4]
@@ -143,14 +146,8 @@ function FilterPost(props) {
   
         let new_br1_for_space = document.createElement("br")
         let new_br2_for_space = document.createElement("br")
-  
-  
-        // button : 
-  
-        let new_button_ = document.createElement("button")
-  
-        
-  
+
+          
         // img :
   
         let new_icon_comment = document.createElement("img")
@@ -159,6 +156,8 @@ function FilterPost(props) {
         let new_icon_report = document.createElement("img")
         let new_icon_unfollow = document.createElement("img")
         let new_icon_pp   = document.createElement("img")
+        let new_icon_like  = document.createElement("img")
+        new_icon_like.src = LikeIcon
         new_icon_comment.src = CommentIcon
         new_icon_delete.src = DeleteIcon
         new_icon_follow.src = FollowIcon
@@ -209,9 +208,7 @@ function FilterPost(props) {
   
         let new_date = document.createTextNode(`${hours}:${minutes} - ${day}/${month}/${year}`)
         let new_owner = document.createTextNode(`${data.username}`)
-        let new_button = document.createTextNode("Ajouter")
-  
-        new_button_.appendChild(new_button)
+     
         new_p_for_comment.appendChild(new_comment)
         new_p_for_date.appendChild(new_date)
         new_p_for_owner.appendChild(new_owner)
@@ -235,6 +232,7 @@ function FilterPost(props) {
         new_icon_report.className="icon-report"
         new_icon_unfollow.className="icon-unfollow"
         new_icon_pp.className="icon-pp-filter-post"
+        new_icon_like.className="icon-like-post"
         
   
      
@@ -297,8 +295,15 @@ function FilterPost(props) {
         new_p_for_unfollow.id="unfollowUser"
   
         
-        new_div_for_comment.appendChild(new_button_)
-  
+        new_div_for_comment.appendChild(new_icon_like)
+        await axios.get(axiosUrlLikedPost+id)
+                    .then(res=>{
+                      if(res.data.length !== 0 ){ 
+                        if((res.data[0].posts_liked).includes((data._id).toString())){
+                          new_icon_like.style.filter = "invert(14%) sepia(72%) saturate(7490) hue-rotate(359deg) brightness(97%) contrast(116%)"
+                        }
+                    }
+                    })
         new_div_for_comment.appendChild(new_icon_comment)
         new_div_for_comment.addEventListener('click',(e)=>{
          if(e.target.matches(".dot") || e.target.matches(".ul_options-filter")){
@@ -326,7 +331,19 @@ function FilterPost(props) {
               setTextPopup(`Vous ne suivez plus ${data.username}`)
               document.getElementById("popup_add_follow").style.visibility = "visible"
           })
-        }      
+        } 
+        else if(e.target.matches(".icon-like-post")){
+          if(e.target.style.filter === "invert(14%) sepia(72%) saturate(7490) hue-rotate(359deg) brightness(97%) contrast(116%)")
+          {
+            axios.delete(axiosUrlLikedPost+id+"/"+(data._id).toString())
+            e.target.style.filter = "invert(0%) sepia(100%) saturate(0%) hue-rotate(248deg) brightness(96%) contrast(107%)"
+          }
+          else{
+            axios.put(axiosUrlLikedPost+id+"/"+(data._id).toString())
+            e.target.style.filter = "invert(14%) sepia(72%) saturate(7490) hue-rotate(359deg) brightness(97%) contrast(116%)"
+
+          }
+    }    
 
          else {
           navigate(`/post/${id}/${data._id}`)

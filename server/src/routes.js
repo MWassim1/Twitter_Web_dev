@@ -122,6 +122,15 @@ module.exports=function(router){
   .get("/api/friendlist/:id1/:id2",(req,res)=>{
     console.log("/api/friendlist/:id1/:id2")
   })
+  .get("/api/postliked/:id",(req,res)=>{
+    console.log("/api/postliked/:id")
+  })
+  .put("/api/postliked/:id/:id_post",(req,res)=>{
+    console.log("/api/postliked/:id/:id_post")
+  })
+  .delete("/api/postliked/:id/:id_post",(req,res)=>{
+    console.log("/api/postliked/:id/:id_post")
+  })
 }
 
 
