@@ -69,3 +69,40 @@ div .body {
     color: rgb(255, 255, 255);
   }
   
+  #popup_account_notfound{
+    visibility: hidden; 
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  #text_popup_account_notfound{
+    position: relative;
+    padding: 32px;
+    width: 100%;
+    max-width: 640px;
+    height: 100px;
+    background-color: white;
+  }
+  
+  #account_notfound_pop_button{
+    background-color: #333;
+    color: white;
+    position: absolute;
+    top: 580px;
+    left: 954px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  
+  #account_notfound_pop_button:hover{
+    background-color: #2e2e2e;
+  }

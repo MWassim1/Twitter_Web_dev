@@ -23,6 +23,7 @@ function SignInForm(props){
       email:'',
       password:''     
     })
+  const [textPopup,setTextPopup] = useState('')
     
   useEffect(()=>{
     axios.get(axiosUrlLogin)
@@ -66,14 +67,17 @@ function SignInForm(props){
           .catch((err2)=>console.log(err2.response))
 
 			}
-		}).catch((err)=> console.log(err.response))
+		}).catch((err)=> {setTextPopup(err.response.data);document.getElementById("popup_account_notfound").style.visibility = "visible"})
     }
 
     const handleChange = (evt) => {
       const{name,value} = evt.target;
       setConnexion({...connexion,[name]:value})
       }
-
+    
+    const handleHidePopup = (evt) =>{
+      document.getElementById("popup_account_notfound").style.visibility = "hidden"
+    }
     return <div><div id="body" ><Header title="Page de connexion"></Header><h1>Connexion</h1><form action="submit" onKeyDown={onEnterKey} onSubmit={handleSubmit} > 
     <p id='check_syntaxe'></p>
 		<label htmlFor="email"><input type="text" id="email" name="email" placeholder="Adresse email" value={connexion.email} onChange={handleChange} /></label><br/><br/>
@@ -81,7 +85,12 @@ function SignInForm(props){
         <input type="submit" value="Se connecter"/>
         </form>
         <p>Vous n'avez pas de compte ? <Link to="/SignUp">Créer un compte</Link></p>
-        </div></div>
+        </div>
+        <div id="popup_account_notfound">
+          <p id="text_popup_account_notfound">{textPopup}</p>
+          <button id="account_notfound_pop_button" onClick={handleHidePopup}>OK</button>
+        </div>
+        </div>
 }
 
 export default SignInForm

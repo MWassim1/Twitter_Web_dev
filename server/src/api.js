@@ -34,7 +34,6 @@ app.post(`/api/users`,formSignUp)
 
 //GET /api/getsession (récupère la session)
 .get("/api/getsession",(req,res)=>{
-  console.log("SESSION : ",req.session)
   if(req.session.user !== undefined){
     res.send({loggedIn: true,user: req.session.user})
   }else { res.send({loggedIn: false})}
