@@ -1,0 +1,353 @@
+[{
+  "_id": {
+    "$oid": "6431465f36fd56198ac3d600"
+  },
+  "lastname": "test",
+  "firstname": "name",
+  "email": "mussardwassim921@gmail.com",
+  "username": "the",
+  "password": "12345",
+  "createdAt": {
+    "$date": "2023-04-08T10:47:59.252Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-08T10:47:59.252Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64314697f84e98fca205dae2"
+  },
+  "lastname": "test",
+  "firstname": "name",
+  "email": "mUssardwassim921@gmail.com",
+  "username": "the",
+  "password": "12345",
+  "createdAt": {
+    "$date": "2023-04-08T10:48:55.101Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-08T10:48:55.101Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64314b7390dcffbc4b409bd5"
+  },
+  "lastname": "test",
+  "firstname": "name",
+  "email": "MMMussardwassim921@gmail.com",
+  "username": "the",
+  "password": "12345",
+  "createdAt": {
+    "$date": "2023-04-08T11:09:39.164Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-08T11:09:39.164Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6431ae2b49f77fc94d372cf1"
+  },
+  "lastname": "nom",
+  "firstname": "test",
+  "email": "testMAIL@gmail.com",
+  "username": "theTestaur",
+  "password": "test12345AA++?",
+  "createdAt": {
+    "$date": "2023-04-08T18:10:51.124Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-08T18:10:51.124Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643318756c7ec490d1b0790c"
+  },
+  "lastname": "Cestmonnom",
+  "firstname": "monprenom",
+  "email": "monadresse@yahoo.fr",
+  "username": "le_meilleur_nom",
+  "password": "monmotdepassE1@",
+  "createdAt": {
+    "$date": "2023-04-09T19:56:37.763Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-09T19:56:37.763Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64331a42d36850eb0c51ddf4"
+  },
+  "lastname": "test",
+  "firstname": "name",
+  "email": "msardwassim921@gmail.com",
+  "username": "the",
+  "password": "12345",
+  "createdAt": {
+    "$date": "2023-04-09T20:04:18.035Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-09T20:04:18.035Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64331ad76ff2c3cb75973026"
+  },
+  "lastname": "nomuser",
+  "firstname": "prenomuser",
+  "email": "mailuser@yahoo.fr",
+  "username": "usernameeee_1",
+  "password": "usernameMDP1-",
+  "createdAt": {
+    "$date": "2023-04-09T20:06:47.983Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-09T20:06:47.983Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643525abe061caa018761aa9"
+  },
+  "lastname": "nameHash",
+  "firstname": "testHash",
+  "email": "testHash@gmail.com",
+  "username": "usernameHash",
+  "password": "$2b$10$qkR/f.mYEoSJgLm0sgCH7./bha8y5xvksIJwWDNiYZ1O6t4mSGYLy",
+  "createdAt": {
+    "$date": "2023-04-11T09:17:31.250Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-11T09:17:31.250Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643526260b0506f30072f8ff"
+  },
+  "lastname": "nameHash",
+  "firstname": "testHash",
+  "email": "testHash2@gmail.com",
+  "username": "usernameHash",
+  "password": "$2b$10$QdhNiNea.N.Rzu2CMWpCAu4jG9g3UDqei4Ddj.ZPHCet31xcZEiiW",
+  "createdAt": {
+    "$date": "2023-04-11T09:19:34.861Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-11T09:19:34.861Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6435265460326aa4f3a8092c"
+  },
+  "lastname": "nameHash",
+  "firstname": "testHash",
+  "email": "testHash3@gmail.com",
+  "username": "usernameHash",
+  "password": "$2b$10$3oWahgbQsfiLrVGDTUiunORXrvspAYXKB5PusHu38y8ZxeT7GSc1.",
+  "createdAt": {
+    "$date": "2023-04-11T09:20:20.603Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-11T09:20:20.603Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6435267ca5b7aaf7e4d6c598"
+  },
+  "lastname": "nameHash",
+  "firstname": "testHash",
+  "email": "testHash4@gmail.com",
+  "username": "usernameHash",
+  "password": "$2b$10$BKGE4fV4DlxuEF7VNCmo1udnIsogsm8O6WwfmOzvIaDqgYyiyhg0S",
+  "createdAt": {
+    "$date": "2023-04-11T09:21:00.254Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-11T09:21:00.254Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643526e2fffbe584aa5ca766"
+  },
+  "lastname": "nameHash",
+  "firstname": "testHash",
+  "email": "testHash5@gmail.com",
+  "username": "usernameHash",
+  "password": "$2b$10$nupbXMVLpmSN6Q76MC0Fs.ByAYXIgOYc/ThuIpZorfGJZCGbJhSF6",
+  "createdAt": {
+    "$date": "2023-04-11T09:22:42.675Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-11T09:22:42.675Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643526f14de52f0c9248c676"
+  },
+  "lastname": "nameHash",
+  "firstname": "testHash",
+  "email": "testHash6@gmail.com",
+  "username": "usernameHash",
+  "password": "$2b$10$2tWka.aFrT5hijpbadbPyuhn3VUy67gQ7pHoqodV9080HG.LvxGDG",
+  "createdAt": {
+    "$date": "2023-04-11T09:22:57.027Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-11T09:22:57.027Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643527294a76b7951c7ecc14"
+  },
+  "lastname": "nameHash",
+  "firstname": "testHash",
+  "email": "testHash7@gmail.com",
+  "username": "usernameHash",
+  "password": "$2b$10$7k.RUzre3g/B0gSLkdetUOFSDeL/.d4CmEwQibCmntDY0M2ROOU3K",
+  "createdAt": {
+    "$date": "2023-04-11T09:23:53.047Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-11T09:23:53.047Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64352739a1db520bcef6a9d0"
+  },
+  "lastname": "nameHash",
+  "firstname": "testHash",
+  "email": "testHash8@gmail.com",
+  "username": "usernameHash",
+  "password": "$2b$10$iWLKbawCQ00GS7cQ3IbmxuMWDb.gIP3mXI4b4W52fOPuPeXQh79iO",
+  "createdAt": {
+    "$date": "2023-04-11T09:24:09.695Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-11T09:24:09.695Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6435278500645cbf161d823c"
+  },
+  "lastname": "Cestmonnom",
+  "firstname": "monprenom ",
+  "email": "testHash9@gmail.com",
+  "username": "usernameEdit",
+  "password": "$2b$10$SoQ6O3uQXbkyGb5POMP5qeOpVQxUG.DyUrnQcGLqeG1rlaUhX5aUy",
+  "createdAt": {
+    "$date": "2023-04-11T09:25:25.217Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-02T12:26:32.358Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64356f91f12da12d97570d60"
+  },
+  "lastname": "fffffffffff",
+  "firstname": "ffffffffff",
+  "email": "azerty@gmail.com",
+  "username": "azerty",
+  "password": "$2b$10$smErTopyC9RpYzg4W3NVvOcZDm3NESGdYXYa24aASOHNPbXtKBxPW",
+  "createdAt": {
+    "$date": "2023-04-11T14:32:49.472Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-11T14:32:49.472Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6439449b79e6ae4f024ee887"
+  },
+  "lastname": "nouveau",
+  "firstname": "compte",
+  "email": "comptepourtest@yahoo.fr",
+  "username": "compte_test",
+  "password": "$2b$10$PTQxEnL0haWkPnN.A15PweTcS77cKJv4mN/6CANbDbeUGosPnLJyK",
+  "createdAt": {
+    "$date": "2023-04-14T12:18:35.283Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-14T12:18:35.283Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643a9304c0edbd9a399d0da3"
+  },
+  "lastname": "test",
+  "firstname": "compte",
+  "email": "scrolldown@gmail.com",
+  "username": "scrollDown__",
+  "password": "scrollDown123@",
+  "createdAt": {
+    "$date": "2023-04-15T12:05:24.715Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-15T12:05:24.715Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644fc133b717490e1b4e9ca4"
+  },
+  "lastname": "Olivier",
+  "firstname": "Tom",
+  "email": "robertPierre@yahoo.fr",
+  "username": "TomETOLIVE",
+  "password": "$2b$10$kJi2PCkwsGKNEnRpUfgzBuFxb/B8js9Qa4QP2aPjmpBhsDS2FrwKu",
+  "createdAt": {
+    "$date": "2023-05-01T13:40:03.388Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-02T12:20:23.623Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6450dd524af0e36b7ab962df"
+  },
+  "lastname": "ddddd",
+  "firstname": "EditFirstName",
+  "email": "EditCompte@yahoo.fr",
+  "username": "Mariiiiiio",
+  "password": "$2b$10$a7gkeUVUZmkLtUAq7fxfou8CqDLcSAG2YqKjvggPzUXEyyfWVOw9m",
+  "createdAt": {
+    "$date": "2023-05-02T09:52:18.786Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-02T10:24:25.591Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64561a6841225bcff8f307ad"
+  },
+  "lastname": "Chevalier",
+  "firstname": "Pierre",
+  "email": "pchevalier@yahoo.fr",
+  "username": "Rattata",
+  "password": "$2b$10$FUjxWMj7TZtTGoBq.K8yq.RH4jv66YB6fhyRIz99c4av5jPcvRBZy",
+  "createdAt": {
+    "$date": "2023-05-06T09:14:16.763Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-06T09:42:01.752Z"
+  },
+  "__v": 0
+}]

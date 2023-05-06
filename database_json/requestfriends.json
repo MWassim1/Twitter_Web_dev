@@ -1,0 +1,29 @@
+[{
+  "_id": {
+    "$oid": "6453b5f2f137b46c015f2414"
+  },
+  "user_id": "6450dd524af0e36b7ab962df",
+  "friends_id": [],
+  "friends_login": [],
+  "createdAt": {
+    "$date": "2023-05-04T13:41:06.570Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-04T21:09:00.074Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6453b6d6f137b46c015f2574"
+  },
+  "user_id": "6435278500645cbf161d823c",
+  "friends_id": [],
+  "friends_login": [],
+  "createdAt": {
+    "$date": "2023-05-04T13:44:54.704Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-06T10:35:48.161Z"
+  },
+  "__v": 0
+}]

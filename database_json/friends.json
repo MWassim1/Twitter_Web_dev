@@ -1,0 +1,51 @@
+[{
+  "_id": {
+    "$oid": "6453f981e5d98a5e16581da1"
+  },
+  "user_id": "6435278500645cbf161d823c",
+  "friends_id": [
+    "6450dd524af0e36b7ab962df"
+  ],
+  "friends_login": [
+    "Mariiiiiio"
+  ],
+  "createdAt": {
+    "$date": "2023-05-04T18:29:21.064Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-06T10:38:06.111Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6453f981e5d98a5e16581da3"
+  },
+  "user_id": "6450dd524af0e36b7ab962df",
+  "friends_id": [
+    "6435278500645cbf161d823c"
+  ],
+  "friends_login": [
+    "usernameEdit"
+  ],
+  "createdAt": {
+    "$date": "2023-05-04T18:29:21.073Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-04T21:09:00.104Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64562dd860cfd6b59893a716"
+  },
+  "user_id": "64561a6841225bcff8f307ad",
+  "friends_id": [],
+  "friends_login": [],
+  "createdAt": {
+    "$date": "2023-05-06T10:37:12.373Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-06T10:38:06.116Z"
+  },
+  "__v": 0
+}]

@@ -1,0 +1,46 @@
+[{
+  "_id": {
+    "$oid": "644fccb047221c72342fdcb4"
+  },
+  "id": "6435278500645cbf161d823c",
+  "email": "testHash9@gmail.com",
+  "password": "$2b$10$SoQ6O3uQXbkyGb5POMP5qeOpVQxUG.DyUrnQcGLqeG1rlaUhX5aUy",
+  "isconnected": false,
+  "createdAt": {
+    "$date": "2023-05-01T14:29:04.321Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-05T15:40:44.158Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644fccd347221c72342fdd14"
+  },
+  "id": "644fc133b717490e1b4e9ca4",
+  "email": "robertPierre@yahoo.fr",
+  "password": "$2b$10$kJi2PCkwsGKNEnRpUfgzBuFxb/B8js9Qa4QP2aPjmpBhsDS2FrwKu",
+  "isconnected": true,
+  "createdAt": {
+    "$date": "2023-05-01T14:29:39.336Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-02T12:20:23.626Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6450dd644af0e36b7ab962e4"
+  },
+  "id": "6450dd524af0e36b7ab962df",
+  "email": "EditCompte@yahoo.fr",
+  "password": "$2b$10$a7gkeUVUZmkLtUAq7fxfou8CqDLcSAG2YqKjvggPzUXEyyfWVOw9m",
+  "isconnected": true,
+  "createdAt": {
+    "$date": "2023-05-02T09:52:36.898Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-05T12:39:23.412Z"
+  },
+  "__v": 0
+}]

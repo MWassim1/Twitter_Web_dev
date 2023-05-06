@@ -109,7 +109,6 @@ module.exports.get_post=async(req,res)=>{
 
     const posts = await PostModel.find()
     if(posts[0]!==undefined){
-        const date = posts[0].createdAt
         return res.status(200).send(posts)
     }
     return res.status(403)

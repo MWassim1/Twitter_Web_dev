@@ -1,0 +1,784 @@
+{
+	"info": {
+		"_postman_id": "e21f2728-757c-4fdc-a616-1f5fd155449c",
+		"name": "Requêtes-MUSSARD-ZERRAD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26274794"
+	},
+	"item": [
+		{
+			"name": "Création d'un compte",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"lastname\":\"Chevalier\",\n    \"firstname\" : \"Pierre\",\n    \"email\":\"pchevalier@yahoo.fr\",\n    \"username\":\"Rattata\",\n    \"password\":\"chevalieR123!\"\n \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Récupère tout les utilsateurs qui commencent par le paramtère pour nom d'utilisateur",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/api/users/Ra",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"users",
+						"Ra"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Connexion d'un utilisateur",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"pchevalier@yahoo.fr\",\n    \"password\":\"chevalieR123!\"\n \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7000/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Permet de déconnecter un utilisateur ( attention à bien avoir le même ID, qui est l'ID créé par la base de donnée au moment de la création du compte \"_id\" )",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\" :\"64561a6841225bcff8f307ad\",\n    \"email\": \"pchevalier@yahoo.fr\",\n    \"password\": \"chevalieR123!\",\n    \"isconnected\" : \"false\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7000/api/user/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"user",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtention des informations sur un utilisateur",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/api/user/64561a6841225bcff8f307ad",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"user",
+						"64561a6841225bcff8f307ad"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modification des informations d'un utilisateur",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"lastname\":\"Chevalier\",\n    \"firstname\" : \"Pierre\",\n    \"email\":\"pchevalier@yahoo.fr\",\n    \"username\":\"Rattata\",\n    \"password\":\"chevalieR123!\",\n    \"profile-picture\" :\"\",\n    \"bio\":\"J'aime bien Pokemon\",\n    \"age\" : 15,\n    \"pays\" :\"France\",\n    \"ville\":\"\"\n \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7000/api/user/64561a6841225bcff8f307ad",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"user",
+						"64561a6841225bcff8f307ad"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Récupère toutes les informations liées à l'utilisateur :id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/api/userinfo/64561a6841225bcff8f307ad",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"userinfo",
+						"64561a6841225bcff8f307ad"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retourne les utilisateurs connectés ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/api/logged",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"logged"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Création d'un post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n    \"user_id\" : \"64561a6841225bcff8f307ad\",\n    \"username\" : \"Rattata\",\n    \"post\" : \"Voici mon premier post sur le site\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7000/api/post",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtention de toutes les publications",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/api/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtention d'un post  spécifique (Encore  une fois ca dépend de l'id dans la base de donnée)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/api/post2/645623b643589a9bb825bd15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"post2",
+						"645623b643589a9bb825bd15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modification d'un post",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"post\" :\"Voici mon premier post modifié\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7000/api/post/645623b643589a9bb825bd15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"post",
+						"645623b643589a9bb825bd15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Suppression d'un post",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/api/post/645623b643589a9bb825bd15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"post",
+						"645623b643589a9bb825bd15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filtre les posts qui contiennent une chaîne de caractère spécifique",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/api/posts/post",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"posts",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Récupère les publications aimées par un utilisateur",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/api/postliked/6435278500645cbf161d823c",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"postliked",
+						"6435278500645cbf161d823c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ajoute une publication comme aimée",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/api/postliked/6435278500645cbf161d823c/64526d1da028662101762ee2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"postliked",
+						"6435278500645cbf161d823c",
+						"64526d1da028662101762ee2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Supprime une publication aimée ",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/api/postliked/6435278500645cbf161d823c/64526d1da028662101762ee2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"postliked",
+						"6435278500645cbf161d823c",
+						"64526d1da028662101762ee2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Envoie d'une demande d'ami",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/api/friendlist/64561a6841225bcff8f307ad/6435278500645cbf161d823c",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"friendlist",
+						"64561a6841225bcff8f307ad",
+						"6435278500645cbf161d823c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Récupère toutes les demandes d'amis pour un utilisateur",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/api/friendlist/6435278500645cbf161d823c",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"friendlist",
+						"6435278500645cbf161d823c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Donne une réponse suite à  la demande d'ami",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n    \"user_login\" : \"Rattata\",\n    \"user_id\":  \"64561a6841225bcff8f307ad\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7000/api/friendlist/6435278500645cbf161d823c",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"friendlist",
+						"6435278500645cbf161d823c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "L'utilisateur id1 accepte la demande d'ami",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/api/friend/6435278500645cbf161d823c/64561a6841225bcff8f307ad",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"friend",
+						"6435278500645cbf161d823c",
+						"64561a6841225bcff8f307ad"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Supprime un ami ",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/api/friend/6435278500645cbf161d823c/64561a6841225bcff8f307ad",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"friend",
+						"6435278500645cbf161d823c",
+						"64561a6841225bcff8f307ad"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtention de  de toutes les informations liées aux amis",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/api/friend/6435278500645cbf161d823c",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"friend",
+						"6435278500645cbf161d823c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Renvoie un booleen pour savoir si id1 est ami avec id2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/api/friend/6435278500645cbf161d823c/64561a6841225bcff8f307ad",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"friend",
+						"6435278500645cbf161d823c",
+						"64561a6841225bcff8f307ad"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "renvoie si id1 a deja demandé en ami id2 et doit donc attendre une réponse",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/api/friendlist/6435278500645cbf161d823c/64561a6841225bcff8f307ad",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"friendlist",
+						"6435278500645cbf161d823c",
+						"64561a6841225bcff8f307ad"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ajout d'un commentaire sous un post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"comment\" : \"J'ajoute un commentaire\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7000/api/post/comment/6435278500645cbf161d823c/645402d292be3c7febc9ee57",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"post",
+						"comment",
+						"6435278500645cbf161d823c",
+						"645402d292be3c7febc9ee57"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtention de  de toutes les informations liées aux commentaires de la publication :id_post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/api/post/comment/645402d292be3c7febc9ee57",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"post",
+						"comment",
+						"645402d292be3c7febc9ee57"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modification d'un commentaire (ATTENTION MODIFIER LE CHAMPS \"createdAt\" si nécessaire)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n    \"old_comment\" :\"J'ajoute un commentaire\",\n    \"new_comment\" : \"Je modifie mon commentaire\",\n    \"user_comment\": \"6435278500645cbf161d823c\",\n    \"createdAt\": \"2023-05-06T10:44:44.931Z\"\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7000/api/post/comment/645402d292be3c7febc9ee57",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"post",
+						"comment",
+						"645402d292be3c7febc9ee57"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Suppression d'un commentaire (ATTENTION MODIFIER LE CHAMPS \"createdAt\" si nécessaire)",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n    \n    \"comment\" : \"Je modifie mon commentaire\",\n    \"user_comment\": \"6435278500645cbf161d823c\",\n    \"createdAt\": \"2023-05-06T10:44:44.931Z\"\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7000/api/post/comment/645402d292be3c7febc9ee57",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"post",
+						"comment",
+						"645402d292be3c7febc9ee57"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ajout d'un follow (Ne gère pas si l'utilisateur suit déjà id2 , car c'est géré côté front)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/api/user/follow/64561a6841225bcff8f307ad/6450dd524af0e36b7ab962df",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"user",
+						"follow",
+						"64561a6841225bcff8f307ad",
+						"6450dd524af0e36b7ab962df"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtention de toutes les informations liées aux follows de :id_follow ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/api/user/followers/64561a6841225bcff8f307ad",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"user",
+						"followers",
+						"64561a6841225bcff8f307ad"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Suppression d'un compte suivi (Ne gère pas si le compte qu'on ne souhaite plus suivre est déjà suivi ou non --> Géré côté front)",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/api/user/follow/64561a6841225bcff8f307ad/6450dd524af0e36b7ab962df",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"user",
+						"follow",
+						"64561a6841225bcff8f307ad",
+						"6450dd524af0e36b7ab962df"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,34 @@
+[{
+  "_id": {
+    "$oid": "6454ff95c8505b3e4b8ad0d3"
+  },
+  "user_id": "1",
+  "posts_liked": [
+    "2"
+  ],
+  "createdAt": {
+    "$date": "2023-05-05T13:07:33.430Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-05T13:08:53.434Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "645503353dd65a0a71f0af77"
+  },
+  "user_id": "6435278500645cbf161d823c",
+  "posts_liked": [
+    "64537c8e313fe6b76cb9b538",
+    "645402d292be3c7febc9ee57",
+    "6454f71ba5b7a372aceba0ba",
+    "643a9334c0edbd9a399d0da7"
+  ],
+  "createdAt": {
+    "$date": "2023-05-05T13:23:01.699Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-06T10:28:40.636Z"
+  },
+  "__v": 0
+}]

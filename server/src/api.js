@@ -1,5 +1,8 @@
 const { formSignIn,getPostLiked,addPostLiked, delPostLiked,formSignUp,logout,user_id,new_post,getUser,filterPost,resFriendRequest,waitResFR,getFriendRequest,get_post,setlogin,delFollow,addToFriendList,getSession,get_login,isMyFriend,getlogged,get_user, islogged,setUser,saveSession,get_post_id,get_post_idpost,setPost,delPost,addFriend,getFriend,delFriend,addComment,getComments,setComment,delComment,addFollow,getFollowers,getUserByName} = require('../../bdd/function');
 
+
+
+////////// ATTENTION CERTAINES FONCTIONS NE GERE PAS TOUTES LES CONDITIONS CAR ELLES SONT GEREES COTE FRONT \\\\\\\\\\
   
 module.exports=function(app){
 
